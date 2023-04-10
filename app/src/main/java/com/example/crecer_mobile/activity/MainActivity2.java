@@ -28,7 +28,6 @@ public class MainActivity2 extends AppCompatActivity {
     EditText txt1, txt2;
     Button btnIngresar;
     ImageView imageViewTwitter, imageViewFacebook, imageViewYoutube, imageViewLink;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
