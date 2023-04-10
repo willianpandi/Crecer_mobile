@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/nav_configuracion">
+
+    <fragment
+        android:id="@+id/nav_inicio"
+        android:name="com.example.crecer_mobile.activity.ui.inicio.InicioFragment"
+        android:label="INICIO"
+        tools:layout="@layout/fragment_inicio" />
+
+    <fragment
+        android:id="@+id/nav_consultas"
+        android:name="com.example.crecer_mobile.activity.ui.consultas.ConsultasFragment"
+        android:label="CONSULTAS"
+        tools:layout="@layout/fragment_consultas" />
+
+    <fragment
+        android:id="@+id/nav_servicios"
+        android:name="com.example.crecer_mobile.activity.ui.servicios.ServiciosFragment"
+        android:label="SERVICIOS"
+        tools:layout="@layout/fragment_servicios" />
+
+    <fragment
+        android:id="@+id/nav_configuracion"
+        android:name="com.example.crecer_mobile.activity.ui.configuracion.ConfiguracionFragment"
+        android:label="CONFIGURACIÓN"
+        tools:layout="@layout/fragment_configuracion" />
+
+</navigation>
