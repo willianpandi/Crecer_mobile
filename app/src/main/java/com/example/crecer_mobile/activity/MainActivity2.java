@@ -12,7 +12,17 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.crecer_mobile.R;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity2 extends AppCompatActivity {
     EditText txt1, txt2;
@@ -28,6 +38,8 @@ public class MainActivity2 extends AppCompatActivity {
         btnIngresar = (Button) findViewById(R.id.button);
         txt1 = (EditText) findViewById(R.id.editTextTextPersonName);
         txt2 = (EditText) findViewById(R.id.editTextTextPassword);
+
+
         imageViewTwitter = (ImageView) findViewById(R.id.imagetwitter);
         imageViewFacebook = (ImageView) findViewById(R.id.imagefacebook);
         imageViewYoutube = (ImageView) findViewById(R.id.imageyoutube);
@@ -40,44 +52,7 @@ public class MainActivity2 extends AppCompatActivity {
         btnIngresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(txt1.getText().toString().equals("") || txt2.getText().toString().equals(""))
-                {
-                    //Toast.makeText(getApplicationContext(), "¡Existen campos vacios!",Toast.LENGTH_SHORT).show();
-
-                    AlertDialog.Builder alerta = new AlertDialog.Builder(MainActivity2.this);
-                    alerta.setTitle("¡Existen campos vacios!")
-                            .setMessage("Ingrese los campos requeridos")
-                            .setIcon(android.R.drawable.ic_dialog_info);
-                    alerta.show();
-
-                    txt1.setText("");
-                    txt2.setText("");
-                    txt1.requestFocus();
-                }
-                else
-                {
-                    if(txt1.getText().toString().equals("Willian") && txt2.getText().toString().equals("12345"))
-                    {
-                        startActivity(new Intent(MainActivity2.this, InicioActivity.class));
-                        //Intent pantallamenu = new Intent(MainActivity2.this, InicioActivity.class);
-                        //startActivity(pantallamenu);
-                        finish();
-                    }
-                    else
-                    {
-                        //Toast.makeText(getApplicationContext(),"¡Credenciales incorrectas!",Toast.LENGTH_SHORT).show();
-
-                        AlertDialog.Builder alerta = new AlertDialog.Builder(MainActivity2.this);
-                        alerta.setTitle("¡Credenciales incorrectas!")
-                                .setMessage("Ingrese el usuario y contraseña correspondiente")
-                                .setIcon(android.R.drawable.ic_dialog_alert);
-                        alerta.show();
-
-                        txt1.setText("");
-                        txt2.setText("");
-                        txt1.requestFocus();
-                    }
-                }
+                validarusuario("http://192.168.100.36:80/crecer/validar_usuario.php");
             }
         });
 
@@ -120,4 +95,43 @@ public class MainActivity2 extends AppCompatActivity {
         });
     }
 
+
+    private void validarusuario(String URL) {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                if (!response.isEmpty()) {
+                    startActivity(new Intent(MainActivity2.this, InicioActivity.class));
+                    finish();
+                } else {
+                    AlertDialog.Builder alerta = new AlertDialog.Builder(MainActivity2.this);
+                    alerta.setTitle("¡Credenciales incorrectas!")
+                            .setMessage("Ingrese el usuario y contraseña correspondiente")
+                            .setIcon(android.R.drawable.ic_dialog_alert);
+                    alerta.show();
+
+                    txt1.setText("");
+                    txt2.setText("");
+                    txt1.requestFocus();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                Toast.makeText(MainActivity2.this,error.toString(),Toast.LENGTH_SHORT).show();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError{
+              Map<String, String> parameters = new HashMap<String, String>();
+            parameters.put("usuario", txt1.getText().toString());
+            parameters.put("password", txt2.getText().toString());
+            return parameters;
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
+    }
 }
