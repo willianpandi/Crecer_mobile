@@ -1,5 +1,6 @@
 package com.example.crecer_mobile.activity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -21,11 +22,20 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.crecer_mobile.R;
 
+import java.security.SecureRandom;
+import java.security.cert.X509Certificate;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
+
 public class MainActivity2 extends AppCompatActivity {
-    EditText txt1, txt2;
+    EditText txtuser, txtpass;
     Button btnIngresar;
     ImageView imageViewTwitter, imageViewFacebook, imageViewYoutube, imageViewLink;
     @Override
@@ -35,8 +45,8 @@ public class MainActivity2 extends AppCompatActivity {
 
         //logico vs grafico
         btnIngresar = (Button) findViewById(R.id.button);
-        txt1 = (EditText) findViewById(R.id.editTextTextPersonName);
-        txt2 = (EditText) findViewById(R.id.editTextTextPassword);
+        txtuser = (EditText) findViewById(R.id.editTextTextPersonName);
+        txtpass = (EditText) findViewById(R.id.editTextTextPassword);
 
 
         imageViewTwitter = (ImageView) findViewById(R.id.imagetwitter);
@@ -51,7 +61,17 @@ public class MainActivity2 extends AppCompatActivity {
         btnIngresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                validarusuario("http://192.168.100.36:80/crecer/validar_usuario.php");
+
+                if (txtuser.getText().toString().isEmpty() || txtpass.getText().toString().isEmpty())
+                {
+                    if (txtuser.getText().toString().isEmpty()){txtuser.setError("Campo Obligatorio");}
+                    if (txtpass.getText().toString().isEmpty()){txtpass.setError("Campo Obligatorio");}
+                }
+                else
+                {
+                    validarusuario("https://proyectoflol.000webhostapp.com/validar_usuario.php");
+                }
+
             }
         });
 
@@ -99,7 +119,6 @@ public class MainActivity2 extends AppCompatActivity {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-
                 if (!response.isEmpty()) {
                     startActivity(new Intent(MainActivity2.this, InicioActivity.class));
                     finish();
@@ -110,9 +129,9 @@ public class MainActivity2 extends AppCompatActivity {
                             .setIcon(android.R.drawable.ic_dialog_alert);
                     alerta.show();
 
-                    txt1.setText("");
-                    txt2.setText("");
-                    txt1.requestFocus();
+                    txtuser.setText("");
+                    txtpass.setText("");
+                    txtuser.requestFocus();
                 }
             }
         }, new Response.ErrorListener() {
@@ -125,12 +144,47 @@ public class MainActivity2 extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError{
               Map<String, String> parameters = new HashMap<String, String>();
-            parameters.put("usuario", txt1.getText().toString());
-            parameters.put("password", txt2.getText().toString());
+            parameters.put("usuario", txtuser.getText().toString());
+            parameters.put("password", txtpass.getText().toString());
             return parameters;
             }
         };
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
     }
+
+
+    /**
+     * Enables https connections
+     */
+    @SuppressLint("TrulyRandom")
+    public static void handleSSLHandshake() {
+        try {
+            TrustManager[] trustAllCerts = new TrustManager[]{new X509TrustManager() {
+                public X509Certificate[] getAcceptedIssuers() {
+                    return new X509Certificate[0];
+                }
+
+                @Override
+                public void checkClientTrusted(X509Certificate[] certs, String authType) {
+                }
+
+                @Override
+                public void checkServerTrusted(X509Certificate[] certs, String authType) {
+                }
+            }};
+
+            SSLContext sc = SSLContext.getInstance("SSL");
+            sc.init(null, trustAllCerts, new SecureRandom());
+            HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
+            HttpsURLConnection.setDefaultHostnameVerifier(new HostnameVerifier() {
+                @Override
+                public boolean verify(String arg0, SSLSession arg1) {
+                    return true;
+                }
+            });
+        } catch (Exception ignored) {
+        }
+    }
 }
+
