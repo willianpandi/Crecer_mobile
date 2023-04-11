@@ -78,17 +78,17 @@ public class InicioActivity extends AppCompatActivity {
 
     private void exit() {
         AlertDialog.Builder alerta = new AlertDialog.Builder(InicioActivity.this);
-        alerta.setTitle("CERRAR APLICACIÓN")
-                .setIcon(R.drawable.ic_salir)
-                .setMessage("¿Desea cerrar la aplicación?")
+        alerta.setTitle("Cerrando aplicación")
+                .setIcon(R.drawable.ic_error)
+                .setMessage("¿Estas seguro que deseas cerrar la aplicación de Crecer Móvil?")
                 .setCancelable(false)
-                .setPositiveButton("SI", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Cerrar Aplicación", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         System.exit(0);
                     }
                 })
-                .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
@@ -99,17 +99,17 @@ public class InicioActivity extends AppCompatActivity {
 
     private void logout() {
         AlertDialog.Builder alerta = new AlertDialog.Builder(InicioActivity.this);
-        alerta.setTitle("CERRAR SESIÓN")
-                .setIcon(R.drawable.ic_cerra_sesion)
-                .setMessage("¿Desea cerrar la sesión iniciada?")
+        alerta.setTitle("Cerrando sesión")
+                .setIcon(R.drawable.ic_error)
+                .setMessage("¿Estas seguro que deseas cerrar la sesión de Crecer Móvil?")
                 .setCancelable(false)
-                .setPositiveButton("SI", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Cerrar Sesión", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         startActivity(new Intent(InicioActivity.this, MainActivity2.class));
                     }
                 })
-                .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 

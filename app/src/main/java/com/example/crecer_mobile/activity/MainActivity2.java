@@ -74,10 +74,9 @@ public class MainActivity2 extends AppCompatActivity {
                     //Toast.makeText(getApplicationContext(), "¡Existen campos vacios!",Toast.LENGTH_SHORT).show();
                     AlertDialog.Builder alerta = new AlertDialog.Builder(MainActivity2.this);
                     alerta.setTitle("¡Existen campos vacios!")
-                            .setMessage("Ingrese los campos requeridos")
+                            .setMessage("Ingrese todos los campos requeridos")
                             .setIcon(android.R.drawable.ic_dialog_info);
                     alerta.show();
-
                 }
                 else
                 {
@@ -136,11 +135,10 @@ public class MainActivity2 extends AppCompatActivity {
                     finish();
                 } else {
                     AlertDialog.Builder alerta = new AlertDialog.Builder(MainActivity2.this);
-                    alerta.setTitle("¡Credenciales incorrectas!")
+                    alerta.setTitle("Credenciales incorrectas")
                             .setMessage("Ingrese el usuario y contraseña correspondiente")
                             .setIcon(R.drawable.ic_error);
                     alerta.show();
-
                     txtuser.setText("");
                     txtpass.setText("");
                     txtuser.requestFocus();

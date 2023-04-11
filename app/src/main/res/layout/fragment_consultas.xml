@@ -10,14 +10,14 @@
         android:id="@+id/textView4"
         android:layout_width="94dp"
         android:layout_height="53dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="40dp"
         android:text="Consulta de saldos"
         android:textAlignment="textEnd"
         android:textColor="#951F1F"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.351"
+        app:layout_constraintHorizontal_bias="0.375"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -39,7 +39,6 @@
         android:layout_width="137dp"
         android:layout_height="56dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="40dp"
         android:backgroundTint="#951F1F"
         android:drawableEnd="@drawable/places_ic_search"
         android:drawableTint="#fff"
@@ -48,30 +47,33 @@
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/editTextNumber"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
     <EditText
         android:id="@+id/editTextNumber"
         android:layout_width="154dp"
         android:layout_height="40dp"
-        android:layout_marginStart="68dp"
         android:layout_marginTop="16dp"
         android:backgroundTint="#951F1F"
         android:ems="10"
         android:hint="# de cédula"
         android:inputType="number"
         android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.299"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
     <ImageView
         android:id="@+id/imageView9"
         android:layout_width="80dp"
-        android:layout_height="81dp"
-        android:layout_marginTop="24dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="28dp"
         android:src="@drawable/icon_consulta"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.071"
+        app:layout_constraintHorizontal_bias="0.076"
         app:layout_constraintStart_toEndOf="@+id/textView4"
         app:layout_constraintTop_toTopOf="parent" />
 
