@@ -34,6 +34,8 @@ import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
+import retrofit2.http.Url;
+
 public class MainActivity2 extends AppCompatActivity {
     EditText txtuser, txtpass;
     Button btnIngresar;
@@ -47,7 +49,6 @@ public class MainActivity2 extends AppCompatActivity {
         btnIngresar = (Button) findViewById(R.id.button);
         txtuser = (EditText) findViewById(R.id.editTextTextPersonName);
         txtpass = (EditText) findViewById(R.id.editTextTextPassword);
-
 
         imageViewTwitter = (ImageView) findViewById(R.id.imagetwitter);
         imageViewFacebook = (ImageView) findViewById(R.id.imagefacebook);
@@ -64,8 +65,19 @@ public class MainActivity2 extends AppCompatActivity {
 
                 if (txtuser.getText().toString().isEmpty() || txtpass.getText().toString().isEmpty())
                 {
-                    if (txtuser.getText().toString().isEmpty()){txtuser.setError("Campo Obligatorio");}
-                    if (txtpass.getText().toString().isEmpty()){txtpass.setError("Campo Obligatorio");}
+                    if (txtuser.getText().toString().isEmpty()){
+                        txtuser.setError("Usuario Obligatorio");
+                    }
+                    if (txtpass.getText().toString().isEmpty()){
+                        txtpass.setError("Contraseña Obligatorio");
+                    }
+                    //Toast.makeText(getApplicationContext(), "¡Existen campos vacios!",Toast.LENGTH_SHORT).show();
+                    AlertDialog.Builder alerta = new AlertDialog.Builder(MainActivity2.this);
+                    alerta.setTitle("¡Existen campos vacios!")
+                            .setMessage("Ingrese los campos requeridos")
+                            .setIcon(android.R.drawable.ic_dialog_info);
+                    alerta.show();
+
                 }
                 else
                 {
@@ -126,7 +138,7 @@ public class MainActivity2 extends AppCompatActivity {
                     AlertDialog.Builder alerta = new AlertDialog.Builder(MainActivity2.this);
                     alerta.setTitle("¡Credenciales incorrectas!")
                             .setMessage("Ingrese el usuario y contraseña correspondiente")
-                            .setIcon(android.R.drawable.ic_dialog_alert);
+                            .setIcon(R.drawable.ic_error);
                     alerta.show();
 
                     txtuser.setText("");
@@ -144,7 +156,7 @@ public class MainActivity2 extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError{
               Map<String, String> parameters = new HashMap<String, String>();
-            parameters.put("usuario", txtuser.getText().toString());
+            parameters.put("user", txtuser.getText().toString());
             parameters.put("password", txtpass.getText().toString());
             return parameters;
             }
