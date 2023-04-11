@@ -21,6 +21,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.crecer_mobile.R;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.security.SecureRandom;
 import java.security.cert.X509Certificate;
@@ -38,6 +39,7 @@ import retrofit2.http.Url;
 
 public class MainActivity2 extends AppCompatActivity {
     EditText txtuser, txtpass;
+    TextInputLayout txtInputUsuario, txtInputPassword;
     Button btnIngresar;
     ImageView imageViewTwitter, imageViewFacebook, imageViewYoutube, imageViewLink;
     @Override
@@ -47,8 +49,12 @@ public class MainActivity2 extends AppCompatActivity {
 
         //logico vs grafico
         btnIngresar = (Button) findViewById(R.id.button);
-        txtuser = (EditText) findViewById(R.id.editTextTextPersonName);
-        txtpass = (EditText) findViewById(R.id.editTextTextPassword);
+
+        txtuser = findViewById(R.id.edtUser);
+        txtpass = findViewById(R.id.edtPassword);
+        txtInputUsuario = findViewById(R.id.editTextTextPersonName);
+        txtInputPassword = findViewById(R.id.editTextTextPassword);
+
 
         imageViewTwitter = (ImageView) findViewById(R.id.imagetwitter);
         imageViewFacebook = (ImageView) findViewById(R.id.imagefacebook);
