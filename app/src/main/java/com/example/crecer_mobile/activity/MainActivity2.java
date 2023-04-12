@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,6 +23,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.crecer_mobile.R;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.security.SecureRandom;
@@ -58,8 +61,8 @@ public class MainActivity2 extends AppCompatActivity {
 
         imageViewTwitter = (ImageView) findViewById(R.id.imagetwitter);
         imageViewFacebook = (ImageView) findViewById(R.id.imagefacebook);
-        imageViewYoutube = (ImageView) findViewById(R.id.imageyoutube);
-        imageViewLink = (ImageView) findViewById(R.id.imagelink);
+        //imageViewYoutube = (ImageView) findViewById(R.id.imageyoutube);
+        //imageViewLink = (ImageView) findViewById(R.id.imagelink);
 
         //deshabilitar barra de navegacion
         getSupportActionBar().hide();
@@ -69,31 +72,53 @@ public class MainActivity2 extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                if (txtuser.getText().toString().isEmpty() || txtpass.getText().toString().isEmpty())
-                {
-                    if (txtuser.getText().toString().isEmpty()){
-                        txtuser.setError("Usuario Obligatorio");
+                try {
+                    if (validar()){
+                        validarusuario("https://proyectoflol.000webhostapp.com/validar_usuario.php");
                     }
-                    if (txtpass.getText().toString().isEmpty()){
-                        txtpass.setError("Contraseña Obligatorio");
-                    }
-                    //Toast.makeText(getApplicationContext(), "¡Existen campos vacios!",Toast.LENGTH_SHORT).show();
-                    AlertDialog.Builder alerta = new AlertDialog.Builder(MainActivity2.this);
-                    alerta.setTitle("¡Existen campos vacios!")
-                            .setMessage("Ingrese todos los campos requeridos")
-                            .setIcon(android.R.drawable.ic_dialog_info);
-                    alerta.show();
-                }
-                else
-                {
-                    validarusuario("https://proyectoflol.000webhostapp.com/validar_usuario.php");
+
+                }catch (Exception e){
+                    Toast.makeText(getApplicationContext(), "¡Se ha producido un error al intentar loguearte!", Toast.LENGTH_SHORT).show();
                 }
 
             }
         });
 
+        //METODOS para no mostrar las notificaciones de los campos vacios
+        txtuser.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-        //Redes sociales
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                txtInputUsuario.setErrorEnabled(false);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        txtpass.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                txtInputPassword.setErrorEnabled(false);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        //LINK a Redes sociales
         imageViewTwitter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -111,7 +136,7 @@ public class MainActivity2 extends AppCompatActivity {
                 startActivity(intent2);
             }
         });
-
+/*
         imageViewYoutube.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -129,8 +154,9 @@ public class MainActivity2 extends AppCompatActivity {
                 startActivity(intent4);
             }
         });
-    }
 
+ */
+    }
 
     private void validarusuario(String URL) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
@@ -140,7 +166,7 @@ public class MainActivity2 extends AppCompatActivity {
                     startActivity(new Intent(MainActivity2.this, InicioActivity.class));
                     finish();
                 } else {
-                    AlertDialog.Builder alerta = new AlertDialog.Builder(MainActivity2.this);
+                    MaterialAlertDialogBuilder alerta = new MaterialAlertDialogBuilder(MainActivity2.this);
                     alerta.setTitle("Credenciales incorrectas")
                             .setMessage("Ingrese el usuario y contraseña correspondiente")
                             .setIcon(R.drawable.ic_error);
@@ -153,7 +179,6 @@ public class MainActivity2 extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
                 Toast.makeText(MainActivity2.this,error.toString(),Toast.LENGTH_SHORT).show();
             }
         }){
@@ -170,9 +195,28 @@ public class MainActivity2 extends AppCompatActivity {
     }
 
 
-    /**
-     * Enables https connections
-     */
+    //METODO PARA VALIDAR los campos
+        private boolean validar(){
+            boolean retorno=true;
+            String usuario, password;
+            usuario = txtuser.getText().toString();
+            password = txtpass.getText().toString();
+            if (usuario.isEmpty()) {
+                txtInputUsuario.setError("Ingrese su usario y/o correo electrónico");
+                retorno = false;
+            } else {
+                txtInputUsuario.setErrorEnabled(false);
+            }
+            if (password.isEmpty()) {
+                txtInputPassword.setError("Ingrese su contraseña");
+                retorno = false;
+            } else {
+                txtInputPassword.setErrorEnabled(false);
+            }
+            return retorno;
+        }
+
+    //Enables https connections
     @SuppressLint("TrulyRandom")
     public static void handleSSLHandshake() {
         try {

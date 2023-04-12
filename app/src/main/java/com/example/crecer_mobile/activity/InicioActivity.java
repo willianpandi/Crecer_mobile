@@ -6,14 +6,15 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
+import android.widget.Toast;
 
 import com.example.crecer_mobile.R;
 import com.example.crecer_mobile.databinding.ActivityInicioBinding;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -26,6 +27,7 @@ public class InicioActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityInicioBinding binding;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,12 +79,12 @@ public class InicioActivity extends AppCompatActivity {
     }
 
     private void exit() {
-        AlertDialog.Builder alerta = new AlertDialog.Builder(InicioActivity.this);
-        alerta.setTitle("Cerrando aplicación")
+        MaterialAlertDialogBuilder alerta = new MaterialAlertDialogBuilder(InicioActivity.this);
+        alerta.setTitle("Salir de la aplicación")
                 .setIcon(R.drawable.ic_error)
-                .setMessage("¿Estas seguro que deseas cerrar la aplicación de Crecer Móvil?")
+                .setMessage("¿Estas seguro que deseas salir de la aplicación de Crecer Móvil?")
                 .setCancelable(false)
-                .setPositiveButton("Cerrar Aplicación", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Salir", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         System.exit(0);
@@ -95,18 +97,21 @@ public class InicioActivity extends AppCompatActivity {
                     }
                 });
         alerta.show();
+
     }
 
     private void logout() {
-        AlertDialog.Builder alerta = new AlertDialog.Builder(InicioActivity.this);
+        MaterialAlertDialogBuilder alerta = new MaterialAlertDialogBuilder(InicioActivity.this);
         alerta.setTitle("Cerrando sesión")
                 .setIcon(R.drawable.ic_error)
-                .setMessage("¿Estas seguro que deseas cerrar la sesión de Crecer Móvil?")
+                .setMessage("¿Estas seguro que deseas cerrar la sesión?")
                 .setCancelable(false)
-                .setPositiveButton("Cerrar Sesión", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Cerrar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         startActivity(new Intent(InicioActivity.this, MainActivity2.class));
+                        Toast.makeText(getApplicationContext(), "Se ha cerrado la sesión correctamente", Toast.LENGTH_LONG).show();
+                        finish();
                     }
                 })
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {
