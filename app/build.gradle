@@ -53,7 +53,9 @@ dependencies {
 
     implementation 'com.android.volley:volley:1.2.0'
 
+
     //-----------------Dependencias----------------------------------//
+
 
     // Lifecycle components
     implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
@@ -90,7 +92,7 @@ dependencies {
     //implementation 'com.github.f0ris.sweetalert:library:1.6.2'
 
     //ImagenView Circle
-    implementation 'de.hdodenhof:circleimageview:3.1.0'
+    //implementation 'de.hdodenhof:circleimageview:3.1.0'
 
     //Carrusel
     //implementation 'com.github.smarteist:autoimageslider:1.4.0'
@@ -102,6 +104,7 @@ dependencies {
     //implementation 'com.github.barteksc:android-pdf-viewer:2.8.2'
 
 }
+
 configurations.implementation {
-  exclude group: 'org.jetbrains.kotlin', module: 'kotlin-stdlib-jdk8'
+    exclude group: 'org.jetbrains.kotlin', module: 'kotlin-stdlib-jdk8'
 }
