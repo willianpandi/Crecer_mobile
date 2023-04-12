@@ -14,9 +14,13 @@ import com.example.crecer_mobile.R;
 
 public class ConsultasFragment extends Fragment {
 
+    View vista;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_consultas, container, false);
+        vista = inflater.inflate(R.layout.fragment_consultas, container, false);
+
+
+        return vista;
 
     }
 

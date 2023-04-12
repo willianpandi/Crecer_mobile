@@ -12,9 +12,13 @@ import com.example.crecer_mobile.R;
 
 public class ConfiguracionFragment extends Fragment {
 
+    View vista;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_configuracion, container, false);
+        vista = inflater.inflate(R.layout.fragment_configuracion, container, false);
+
+
+        return vista;
     }
 }
