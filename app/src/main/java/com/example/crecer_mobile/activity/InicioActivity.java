@@ -28,7 +28,6 @@ public class InicioActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityInicioBinding binding;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,8 +35,6 @@ public class InicioActivity extends AppCompatActivity {
         binding = ActivityInicioBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setSupportActionBar(binding.appBarInicio.toolbar);
-
-        //Boton flotante
         binding.appBarInicio.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -122,7 +119,6 @@ public class InicioActivity extends AppCompatActivity {
                 });
         alerta.show();
     }
-
 
     @Override
     public boolean onSupportNavigateUp() {

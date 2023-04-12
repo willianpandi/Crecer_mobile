@@ -29,4 +29,21 @@
             </group>
         </menu>
     </item>
+    <item android:title="Sobre nosotros">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:icon="@drawable/ic_terminos_condiciones"
+                    android:title="Términos y condiciones"
+                    />
+                <item
+                    android:icon="@drawable/ic_calificacion"
+                    android:title="Contactanos" />
+                <item
+                    android:icon="@drawable/ic_contactos"
+                    android:title="Califícanos" />
+
+            </group>
+        </menu>
+    </item>
 </menu>

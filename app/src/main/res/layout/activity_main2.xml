@@ -63,12 +63,13 @@
                     android:id="@+id/editTextTextPersonName"
                     android:layout_width="300dp"
                     android:layout_height="match_parent"
-                    android:textColorHint="#000000"
                     app:boxBackgroundColor="#FFFFFF"
                     app:boxBackgroundMode="outline"
+                    app:boxStrokeColor="#8BC34A"
                     app:endIconMode="clear_text"
                     app:helperTextEnabled="true"
                     app:helperTextTextColor="#0B0A0A"
+                    app:hintTextColor="#000000"
                     app:startIconDrawable="@drawable/ic_usuario"
                     app:startIconTint="#951F1F">
 
@@ -93,12 +94,13 @@
                     android:id="@+id/editTextTextPassword"
                     android:layout_width="300dp"
                     android:layout_height="match_parent"
-                    android:textColorHint="#000000"
                     app:boxBackgroundColor="#FFFFFF"
                     app:boxBackgroundMode="outline"
+                    app:boxStrokeColor="#8BC34A"
                     app:endIconMode="password_toggle"
                     app:endIconTint="#009688"
                     app:helperTextEnabled="true"
+                    app:hintTextColor="#000000"
                     app:startIconDrawable="@drawable/ic_contrasenia"
                     app:startIconTint="#951F1F">
 
@@ -107,7 +109,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Contraseña"
-                        android:inputType="textPassword"
+                        android:inputType="date|text|textPassword|phone"
                         android:textSize="16sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 

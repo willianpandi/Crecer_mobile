@@ -58,7 +58,6 @@ public class MainActivity2 extends AppCompatActivity {
         txtInputUsuario = findViewById(R.id.editTextTextPersonName);
         txtInputPassword = findViewById(R.id.editTextTextPassword);
 
-
         imageViewTwitter = (ImageView) findViewById(R.id.imagetwitter);
         imageViewFacebook = (ImageView) findViewById(R.id.imagefacebook);
         //imageViewYoutube = (ImageView) findViewById(R.id.imageyoutube);
