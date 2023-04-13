@@ -30,11 +30,12 @@ public class AdapterCuentas extends RecyclerView.Adapter<AdapterCuentas.ViewHold
         return new ViewHolderCuentas(view);
     }
 
+    //Aqui se debe de asignar la interfaz grafica y el buscador
     @Override
     public void onBindViewHolder(@NonNull AdapterCuentas.ViewHolderCuentas holder, int position) {
         holder.cuenta.setText(String.valueOf(ListaCuentas.get(position).getId()));
-        holder.nombre.setText(ListaCuentas.get(position).getDescripcion());
-        holder.saldo.setText(String.valueOf(ListaCuentas.get(position).getPrecio()));
+        holder.nombre.setText(ListaCuentas.get(position).getNombre());
+        holder.saldo.setText(String.valueOf(ListaCuentas.get(position).getSaldo()));
 
     }
 
@@ -53,12 +54,13 @@ public class AdapterCuentas extends RecyclerView.Adapter<AdapterCuentas.ViewHold
             cuenta = (TextView) itemView.findViewById(R.id.n_cuenta);
             nombre = (TextView) itemView.findViewById(R.id.n_nombre);
             saldo = (TextView) itemView.findViewById(R.id.n_saldo);
+
             btndetalle = (Button) itemView.findViewById(R.id.btnDetalle);
 
             btndetalle.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(nombre.getContext(), "Nombre: "+nombre.getText().toString(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(cuenta.getContext(), "Saldo: "+saldo.getText().toString(), Toast.LENGTH_SHORT).show();
 
                 }
             });

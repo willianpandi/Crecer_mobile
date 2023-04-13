@@ -19,7 +19,7 @@
         <activity
             android:name=".activity.InicioActivity"
             android:label="InicioActivity"
-            android:theme="@style/Theme.Crecer_mobile.NoActionBar" />
+            android:theme="@style/Theme.Crecer_mobile.NoActionBar"/>
 
         <activity
             android:name=".activity.MainActivity2"
