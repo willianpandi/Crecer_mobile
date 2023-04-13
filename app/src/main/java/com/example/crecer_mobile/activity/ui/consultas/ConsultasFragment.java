@@ -92,8 +92,9 @@ public class ConsultasFragment extends Fragment {
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(URL, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
-                JSONObject jsonObject = null;
-                for (int i=0; i < response.length();i++){
+
+               for (int i=0; i < response.length();i++){
+                    JSONObject jsonObject = null;
                     try {
                         jsonObject=response.getJSONObject(i);
                         lista.add(new Cuenta(
@@ -109,6 +110,29 @@ public class ConsultasFragment extends Fragment {
                 }
                 AdapterCuentas adapterCuentas = new AdapterCuentas((ArrayList<Cuenta>) lista);
                 recyclerView.setAdapter(adapterCuentas);
+
+
+                ////////////////////////////////////////////////////////////////////////
+                /*Cuenta cuenta;
+                try {
+
+                    //JSONArray jsonArray = null;
+                    for (int i =0; i< response.length(); i++) {
+                        JSONObject jsonObject=null;
+                        JSONObject = response.getJSONObject(i);
+                        lista.add(new Cuenta(
+                                jsonObject.getInt("id"),
+                                jsonObject.getInt("n_cuenta"),
+                                jsonObject.getString("nombre"),
+                                (float)jsonObject.optDouble("saldo")
+                        ));
+                    }
+                    AdapterCuentas adapterCuentas = new AdapterCuentas((ArrayList<Cuenta>) lista);
+                    recyclerView.setAdapter(adapterCuentas);
+
+                }catch (JSONException e){
+                    Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
+                }*/
             }
             }, new Response.ErrorListener() {
                 @Override
@@ -122,7 +146,7 @@ public class ConsultasFragment extends Fragment {
 
 
 
-    /////////////////////
+    ///////////////////// MUESTRA TODAS LAS CUENTAS /////////////////////////////////////
     private void mostrarcuentas(String URL) {
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
