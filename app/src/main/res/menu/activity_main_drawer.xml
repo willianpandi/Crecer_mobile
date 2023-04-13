@@ -13,12 +13,27 @@
             android:id="@+id/nav_consultas"
             android:icon="@drawable/ic_consulta"
             android:title="Consultas" />
-        <item
-            android:id="@+id/nav_servicios"
-            android:icon="@drawable/ic_servicio"
-            android:title="Servicios" />
-
     </group>
+
+    <item android:title="Nuestros Servicios">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_servicios_ahorro"
+                    android:icon="@drawable/ic_ahorros"
+                    android:title="Ahorro" />
+                <item
+                    android:id="@+id/nav_creditos"
+                    android:icon="@drawable/ic_creditos"
+                    android:title="Créditos" />
+                <item
+                    android:id="@+id/nav_servicios_inversiones"
+                    android:icon="@drawable/ic_inversiones"
+                    android:title="Inversiones" />
+            </group>
+        </menu>
+    </item>
+
     <item android:title="Administración">
         <menu>
             <group android:checkableBehavior="single">
@@ -29,21 +44,5 @@
             </group>
         </menu>
     </item>
-    <item android:title="Sobre nosotros">
-        <menu>
-            <group android:checkableBehavior="single">
-                <item
-                    android:icon="@drawable/ic_terminos_condiciones"
-                    android:title="Términos y condiciones"
-                    />
-                <item
-                    android:icon="@drawable/ic_calificacion"
-                    android:title="Contactanos" />
-                <item
-                    android:icon="@drawable/ic_contactos"
-                    android:title="Califícanos" />
 
-            </group>
-        </menu>
-    </item>
 </menu>

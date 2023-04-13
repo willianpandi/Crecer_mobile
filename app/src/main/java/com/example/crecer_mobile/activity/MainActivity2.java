@@ -24,6 +24,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.crecer_mobile.R;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.progressindicator.CircularProgressIndicator;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.security.SecureRandom;
@@ -45,6 +46,7 @@ public class MainActivity2 extends AppCompatActivity {
     TextInputLayout txtInputUsuario, txtInputPassword;
     Button btnIngresar;
     ImageView imageViewTwitter, imageViewFacebook, imageViewYoutube, imageViewLink;
+    CircularProgressIndicator carga;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +54,7 @@ public class MainActivity2 extends AppCompatActivity {
 
         //logico vs grafico
         btnIngresar = (Button) findViewById(R.id.button);
+        carga = (CircularProgressIndicator) findViewById(R.id.progresbar);
 
         txtuser = findViewById(R.id.edtUser);
         txtpass = findViewById(R.id.edtPassword);
@@ -73,11 +76,13 @@ public class MainActivity2 extends AppCompatActivity {
 
                 try {
                     if (validar()){
-                        validarusuario("https://proyectoflol.000webhostapp.com/validar_usuario.php");
+                        validarusuario("https://computacionmovil2.000webhostapp.com/validar_usuario.php");
+                        carga.setVisibility(View.VISIBLE);
                     }
 
                 }catch (Exception e){
                     Toast.makeText(getApplicationContext(), "¡Se ha producido un error al intentar loguearte!", Toast.LENGTH_SHORT).show();
+                    carga.setVisibility(View.INVISIBLE);
                 }
 
             }
@@ -164,7 +169,9 @@ public class MainActivity2 extends AppCompatActivity {
                 if (!response.isEmpty()) {
                     startActivity(new Intent(MainActivity2.this, InicioActivity.class));
                     finish();
+                    carga.setVisibility(View.INVISIBLE);
                 } else {
+                    carga.setVisibility(View.INVISIBLE);
                     MaterialAlertDialogBuilder alerta = new MaterialAlertDialogBuilder(MainActivity2.this);
                     alerta.setTitle("Credenciales incorrectas")
                             .setMessage("Ingrese el usuario y contraseña correspondiente")

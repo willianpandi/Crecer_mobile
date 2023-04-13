@@ -21,4 +21,6 @@ public class ConfiguracionFragment extends Fragment {
 
         return vista;
     }
+
+
 }

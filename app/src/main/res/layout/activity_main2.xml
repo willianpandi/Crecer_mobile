@@ -10,7 +10,7 @@
         android:id="@+id/linearParte1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center_vertical"
+        android:gravity="center_horizontal"
         android:orientation="vertical">
 
         <FrameLayout
@@ -135,6 +135,13 @@
             </LinearLayout>
 
         </LinearLayout>
+
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:id="@+id/progresbar"
+            android:layout_width="61dp"
+            android:layout_height="66dp"
+            android:indeterminate="true"
+            android:visibility="invisible" />
 
         <LinearLayout
             android:id="@+id/linearParte4"
