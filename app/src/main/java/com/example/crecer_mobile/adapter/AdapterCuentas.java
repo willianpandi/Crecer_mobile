@@ -58,8 +58,8 @@ public class AdapterCuentas extends RecyclerView.Adapter<AdapterCuentas.ViewHold
             btndetalle.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(cuenta.getContext(), "AKI", Toast.LENGTH_SHORT).show();
-                    
+                    Toast.makeText(nombre.getContext(), "Nombre: "+nombre.getText().toString(), Toast.LENGTH_SHORT).show();
+
                 }
             });
         }

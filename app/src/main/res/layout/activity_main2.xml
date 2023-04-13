@@ -10,7 +10,7 @@
         android:id="@+id/linearParte1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center_horizontal"
+        android:gravity="center"
         android:orientation="vertical">
 
         <FrameLayout
@@ -147,7 +147,7 @@
             android:id="@+id/linearParte4"
             android:layout_width="match_parent"
             android:layout_height="68dp"
-            android:layout_marginTop="118dp"
+            android:layout_marginTop="50dp"
             android:layout_marginEnd="0dp"
             android:layout_marginBottom="6dp"
             android:foregroundGravity="center_horizontal"

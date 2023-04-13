@@ -186,6 +186,7 @@ public class MainActivity2 extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(MainActivity2.this,error.toString(),Toast.LENGTH_SHORT).show();
+                carga.setVisibility(View.INVISIBLE);
             }
         }){
             @Override

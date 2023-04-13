@@ -22,11 +22,10 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="100dp"
             android:layout_marginLeft="90dp"
             android:layout_gravity="end"
-
-            android:padding="10dp">
+            android:padding="5dp">
 
             <TextView
                 android:id="@+id/cuenta"
