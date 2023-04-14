@@ -33,6 +33,7 @@ public class AdapterCuentas extends RecyclerView.Adapter<AdapterCuentas.ViewHold
     //Aqui se debe de asignar la interfaz grafica y el buscador
     @Override
     public void onBindViewHolder(@NonNull AdapterCuentas.ViewHolderCuentas holder, int position) {
+        holder.dni.setText(String.valueOf(ListaCuentas.get(position).getN_cuenta()));
         holder.cuenta.setText(String.valueOf(ListaCuentas.get(position).getId()));
         holder.nombre.setText(ListaCuentas.get(position).getNombre());
         holder.saldo.setText(String.valueOf(ListaCuentas.get(position).getSaldo()));
@@ -47,10 +48,11 @@ public class AdapterCuentas extends RecyclerView.Adapter<AdapterCuentas.ViewHold
     public class ViewHolderCuentas extends RecyclerView.ViewHolder {
 
         //variables locales
-        TextView cuenta, nombre, saldo;
+        TextView dni, cuenta, nombre, saldo;
         Button btndetalle;
         public ViewHolderCuentas(@NonNull View itemView) {
             super(itemView);
+            dni = (TextView) itemView.findViewById(R.id.n_dni);
             cuenta = (TextView) itemView.findViewById(R.id.n_cuenta);
             nombre = (TextView) itemView.findViewById(R.id.n_nombre);
             saldo = (TextView) itemView.findViewById(R.id.n_saldo);

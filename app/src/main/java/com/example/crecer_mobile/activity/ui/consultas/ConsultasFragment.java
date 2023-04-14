@@ -61,14 +61,12 @@ public class ConsultasFragment extends Fragment {
         txtbuscar = (EditText) vista.findViewById(R.id.editTextNumber);
 
 
-        lista = new ArrayList<Cuenta>();
-
-
         //BTON buscar}
         btnbuscar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(!txtbuscar.getText().toString().isEmpty()) {
+                    lista = new ArrayList<Cuenta>();
                     buscarcuenta("https://computacionmovil2.000webhostapp.com/buscar_producto.php?id="+txtbuscar.getText().toString()+ " ");
                     txtbuscar.setText("");
                     txtbuscar.requestFocus();
@@ -87,12 +85,12 @@ public class ConsultasFragment extends Fragment {
 
     }
 
-    /////////////////////////////
+    ///////////// BUSCA CUENTA POR NUMERO DE CEDULA ////////////
     private void buscarcuenta(String URL){
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(URL, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
-
+                Cuenta cuenta;
                for (int i=0; i < response.length();i++){
                     JSONObject jsonObject = null;
                     try {
@@ -147,6 +145,7 @@ public class ConsultasFragment extends Fragment {
 
 
     ///////////////////// MUESTRA TODAS LAS CUENTAS /////////////////////////////////////
+    /*
     private void mostrarcuentas(String URL) {
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
             @Override
@@ -177,6 +176,6 @@ public class ConsultasFragment extends Fragment {
             }
         });
         Volley.newRequestQueue(getActivity()).add(stringRequest);
-    }
+    }*/
 
 }
