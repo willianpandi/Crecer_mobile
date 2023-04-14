@@ -23,7 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/imageView2"
-        android:text="&quot;Nos renovamos para una mejor experiencia&quot;"
+        android:text="¡Nos renovamos para una mejor experiencia!"
         android:textAlignment="center"
         android:textColor="#951F1F"
         android:textSize="16sp"

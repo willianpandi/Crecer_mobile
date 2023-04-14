@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".activity.ui.consultas.ConsultasFragment">
 
+
     <TextView
         android:id="@+id/textView4"
         android:layout_width="94dp"
@@ -17,54 +18,65 @@
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.375"
+        app:layout_constraintHorizontal_bias="0.391"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Ingrese su número de cédula:"
-        android:textColor="#000000"
-        android:textSize="18sp"
-        android:textStyle="bold|italic"
-        app:layout_constraintEnd_toEndOf="parent"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/editTextTextPersonName_busqueda"
+        android:layout_width="170dp"
+        android:layout_height="78dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginRight="5dp"
+        app:boxBackgroundColor="#FFFFFF"
+        app:boxBackgroundMode="outline"
+        app:boxStrokeColor="#8BC34A"
+        app:counterEnabled="true"
+        app:counterMaxLength="10"
+        app:helperTextEnabled="true"
+        app:helperTextTextColor="#0B0A0A"
+        app:hintTextColor="#000000"
+        app:endIconMode="clear_text"
+        app:layout_constraintEnd_toStartOf="@+id/button2"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        app:startIconTint="#951F1F">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edtbusqueda"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Número de cédula"
+            android:inputType="none|number"
+            android:textSize="16sp" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="137dp"
-        android:layout_height="56dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="120dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="30dp"
         android:backgroundTint="#951F1F"
         android:drawableEnd="@drawable/places_ic_search"
         android:drawableTint="#fff"
         android:text="Buscar"
         android:textAllCaps="false"
-        android:textSize="18sp"
+        android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/editTextNumber"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
-
-    <EditText
-        android:id="@+id/editTextNumber"
-        android:layout_width="154dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="#951F1F"
-        android:ems="10"
-        android:hint="# de cédula"
-        android:inputType="number"
-        android:textAlignment="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.299"
+        app:layout_constraintHorizontal_bias="0.749"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/carga_lineal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:indeterminate="true"
+        android:visibility="invisible"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName_busqueda" />
 
     <ImageView
         android:id="@+id/imageView9"
@@ -82,9 +94,9 @@
         android:id="@+id/recyclerview_cuentas"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="220dp"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNumber"
-        tools:listitem="@layout/item_cuentas"
-        android:layout_alignParentBottom="true"/>
+        android:layout_alignParentBottom="true"
+        app:layout_constraintTop_toBottomOf="@+id/button2"
+        android:layout_marginTop="215dp"
+        tools:listitem="@layout/item_cuentas" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

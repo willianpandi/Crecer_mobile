@@ -14,8 +14,8 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="208dp"
-        android:layout_height="62dp"
+        android:layout_width="239dp"
+        android:layout_height="71dp"
         android:contentDescription="@string/nav_header_desc"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         app:srcCompat="@drawable/logo_crecer" />
@@ -23,18 +23,18 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:text="Crecer en línea"
+        android:paddingTop="1dp"
+        android:text="Crecer Móvil"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="#000000"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="crecer01@crecer.com.ec"
+        android:text="Juntos crecemos a pasos firmes"
         android:textColor="#000000"
         android:textStyle="italic" />
 </LinearLayout>

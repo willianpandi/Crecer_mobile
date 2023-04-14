@@ -1,9 +1,11 @@
-package com.example.crecer_mobile.adapter;
+package com.example.crecer_mobile.entity.adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ListAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,11 +47,13 @@ public class AdapterCuentas extends RecyclerView.Adapter<AdapterCuentas.ViewHold
         return ListaCuentas.size();
     }
 
-    public class ViewHolderCuentas extends RecyclerView.ViewHolder {
+    public class ViewHolderCuentas extends RecyclerView.ViewHolder{
 
         //variables locales
+        Context context;
         TextView dni, cuenta, nombre, saldo;
         Button btndetalle;
+
         public ViewHolderCuentas(@NonNull View itemView) {
             super(itemView);
             dni = (TextView) itemView.findViewById(R.id.n_dni);
@@ -59,11 +63,12 @@ public class AdapterCuentas extends RecyclerView.Adapter<AdapterCuentas.ViewHold
 
             btndetalle = (Button) itemView.findViewById(R.id.btnDetalle);
 
+            context = itemView.getContext();
+
             btndetalle.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(cuenta.getContext(), "Saldo: "+saldo.getText().toString(), Toast.LENGTH_SHORT).show();
-
+                    Toast.makeText(view.getContext(), "Saldo: "+saldo.getText().toString(), Toast.LENGTH_SHORT).show();
                 }
             });
         }
