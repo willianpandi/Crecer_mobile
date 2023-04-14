@@ -45,7 +45,7 @@ public class ConsultasFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        vista = inflater.inflate(R.layout.fragment_consultas, container, false);
+        vista = inflater.inflate(R.layout.fragment_consulta, container, false);
 
         //logico y GUI
         recyclerView = (RecyclerView) vista.findViewById(R.id.recyclerview_cuentas);

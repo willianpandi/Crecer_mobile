@@ -19,15 +19,15 @@
         <menu>
             <group android:checkableBehavior="single">
                 <item
-                    android:id="@+id/nav_servicios_ahorro"
+                    android:id="@+id/nav_ahorro"
                     android:icon="@drawable/ic_ahorros"
-                    android:title="Ahorro" />
+                    android:title="Ahorros" />
                 <item
                     android:id="@+id/nav_creditos"
                     android:icon="@drawable/ic_creditos"
                     android:title="Créditos" />
                 <item
-                    android:id="@+id/nav_servicios_inversiones"
+                    android:id="@+id/nav_inversiones"
                     android:icon="@drawable/ic_inversiones"
                     android:title="Inversiones" />
             </group>
