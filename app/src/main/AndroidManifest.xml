@@ -17,7 +17,7 @@
         android:theme="@style/Theme.Crecer_mobile"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity3"
+            android:name=".activity.MainActivity3"
             android:exported="false" />
         <activity
             android:name=".activity.InicioActivity"

@@ -1,6 +1,7 @@
 package com.example.crecer_mobile.entity.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,11 +14,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.crecer_mobile.R;
+import com.example.crecer_mobile.activity.MainActivity3;
+import com.example.crecer_mobile.activity.ui.configuracion.ConfiguracionFragment;
+import com.example.crecer_mobile.activity.ui.consultas.ConsultasFragment;
 import com.example.crecer_mobile.entity.Cuenta;
 
 import java.util.ArrayList;
 
-public class AdapterCuentas extends RecyclerView.Adapter<AdapterCuentas.ViewHolderCuentas> {
+public class AdapterCuentas extends RecyclerView.Adapter<AdapterCuentas.ViewHolderCuentas>{
 
     ArrayList<Cuenta> ListaCuentas;
     public AdapterCuentas(ArrayList<Cuenta> listaCuentas)
@@ -40,6 +44,8 @@ public class AdapterCuentas extends RecyclerView.Adapter<AdapterCuentas.ViewHold
         holder.nombre.setText(ListaCuentas.get(position).getNombre());
         holder.saldo.setText(String.valueOf(ListaCuentas.get(position).getSaldo()));
 
+        holder.setOnClickListeners();
+
     }
 
     @Override
@@ -47,30 +53,42 @@ public class AdapterCuentas extends RecyclerView.Adapter<AdapterCuentas.ViewHold
         return ListaCuentas.size();
     }
 
-    public class ViewHolderCuentas extends RecyclerView.ViewHolder{
+    public class ViewHolderCuentas extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         //variables locales
-        Context context;
         TextView dni, cuenta, nombre, saldo;
         Button btndetalle;
 
+        Context context;
+
         public ViewHolderCuentas(@NonNull View itemView) {
             super(itemView);
+            //contexto
+            context = itemView.getContext();
+            //grafico y logico
             dni = (TextView) itemView.findViewById(R.id.n_dni);
             cuenta = (TextView) itemView.findViewById(R.id.n_cuenta);
             nombre = (TextView) itemView.findViewById(R.id.n_nombre);
             saldo = (TextView) itemView.findViewById(R.id.n_saldo);
-
             btndetalle = (Button) itemView.findViewById(R.id.btnDetalle);
+        }
 
-            context = itemView.getContext();
+        void setOnClickListeners(){
+            btndetalle.setOnClickListener(this);
+        }
 
-            btndetalle.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Toast.makeText(view.getContext(), "Saldo: "+saldo.getText().toString(), Toast.LENGTH_SHORT).show();
-                }
-            });
+        @Override
+        public void onClick(View view) {
+            switch (view.getId()){
+                case R.id.btnDetalle:
+                    Intent intent = new Intent(context,MainActivity3.class);
+                    intent.putExtra("cuenta",cuenta.getText());
+                    intent.putExtra("nombre",nombre.getText());
+                    intent.putExtra("cedula",dni.getText());
+                    intent.putExtra("saldo",saldo.getText());
+                    context.startActivity(intent);
+                    break;
+            }
         }
     }
 }

@@ -117,39 +117,4 @@ public class ConsultasFragment extends Fragment {
     }
 
 
-
-    ///////////////////// MUESTRA TODAS LAS CUENTAS /////////////////////////////////////
-    /*
-    private void mostrarcuentas(String URL) {
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Cuenta cuenta;
-                try {
-                    JSONArray jsonArray = new JSONArray(response);
-                    for (int i =0; i< jsonArray.length(); i++) {
-                        JSONObject jsonObject = jsonArray.getJSONObject(i);
-                        lista.add(new Cuenta(
-                                jsonObject.getInt("id"),
-                                jsonObject.getInt("n_cuenta"),
-                                jsonObject.getString("nombre"),
-                                (float)jsonObject.optDouble("saldo")
-                        ));
-                    }
-                    AdapterCuentas adapterCuentas = new AdapterCuentas((ArrayList<Cuenta>) lista);
-                    recyclerView.setAdapter(adapterCuentas);
-
-                }catch (JSONException e){
-                    Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getActivity(),error.toString(),Toast.LENGTH_SHORT).show();
-            }
-        });
-        Volley.newRequestQueue(getActivity()).add(stringRequest);
-    }*/
-
 }
