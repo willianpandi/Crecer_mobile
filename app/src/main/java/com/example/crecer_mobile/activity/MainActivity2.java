@@ -47,6 +47,7 @@ public class MainActivity2 extends AppCompatActivity {
     Button btnIngresar;
     ImageView imageViewTwitter, imageViewFacebook, imageViewYoutube, imageViewLink;
     CircularProgressIndicator carga;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,12 +76,12 @@ public class MainActivity2 extends AppCompatActivity {
             public void onClick(View view) {
 
                 try {
-                    if (validar()){
+                    if (validar()) {
                         validarusuario("https://computacionmovil2.000webhostapp.com/validar_usuario.php");
                         carga.setVisibility(View.VISIBLE);
                     }
 
-                }catch (Exception e){
+                } catch (Exception e) {
                     Toast.makeText(getApplicationContext(), "¡Se ha producido un error al intentar loguearte!", Toast.LENGTH_SHORT).show();
                     carga.setVisibility(View.INVISIBLE);
                 }
@@ -185,16 +186,16 @@ public class MainActivity2 extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(MainActivity2.this,error.toString(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity2.this, error.toString(), Toast.LENGTH_SHORT).show();
                 carga.setVisibility(View.INVISIBLE);
             }
-        }){
+        }) {
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError{
-              Map<String, String> parameters = new HashMap<String, String>();
-            parameters.put("user", txtuser.getText().toString());
-            parameters.put("password", txtpass.getText().toString());
-            return parameters;
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> parameters = new HashMap<String, String>();
+                parameters.put("user", txtuser.getText().toString());
+                parameters.put("password", txtpass.getText().toString());
+                return parameters;
             }
         };
         RequestQueue requestQueue = Volley.newRequestQueue(this);
@@ -203,25 +204,25 @@ public class MainActivity2 extends AppCompatActivity {
 
 
     //METODO PARA VALIDAR los campos
-        private boolean validar(){
-            boolean retorno=true;
-            String usuario, password;
-            usuario = txtuser.getText().toString();
-            password = txtpass.getText().toString();
-            if (usuario.isEmpty()) {
-                txtInputUsuario.setError("Ingrese su usario y/o correo electrónico");
-                retorno = false;
-            } else {
-                txtInputUsuario.setErrorEnabled(false);
-            }
-            if (password.isEmpty()) {
-                txtInputPassword.setError("Ingrese su contraseña");
-                retorno = false;
-            } else {
-                txtInputPassword.setErrorEnabled(false);
-            }
-            return retorno;
+    private boolean validar() {
+        boolean retorno = true;
+        String usuario, password;
+        usuario = txtuser.getText().toString();
+        password = txtpass.getText().toString();
+        if (usuario.isEmpty()) {
+            txtInputUsuario.setError("Ingrese su usario y/o correo electrónico");
+            retorno = false;
+        } else {
+            txtInputUsuario.setErrorEnabled(false);
         }
+        if (password.isEmpty()) {
+            txtInputPassword.setError("Ingrese su contraseña");
+            retorno = false;
+        } else {
+            txtInputPassword.setErrorEnabled(false);
+        }
+        return retorno;
+    }
 
     //Enables https connections
     @SuppressLint("TrulyRandom")

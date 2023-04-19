@@ -62,7 +62,7 @@ public class ConsultasFragment extends Fragment {
             public void onClick(View view) {
                 if(!txtbuscar.getText().toString().isEmpty()) {
                     lista = new ArrayList<Cuenta>();
-                    buscarcuenta("https://computacionmovil2.000webhostapp.com/buscar_producto.php?id="+txtbuscar.getText().toString()+ " ");
+                    buscarcuenta("https://computacionmovil2.000webhostapp.com/buscar_producto.php?id="+txtbuscar.getText().toString());
                     carga.setVisibility(View.VISIBLE);
                     txtbuscar.setText("");
                 }
@@ -72,10 +72,6 @@ public class ConsultasFragment extends Fragment {
                 }
             }
         });
-
-        //Mostrar producto
-        //mostrarcuentas("https://computacionmovil2.000webhostapp.com/mostrar_productos.php");
-
         return vista;
 
     }

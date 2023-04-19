@@ -21,18 +21,18 @@ import com.example.crecer_mobile.entity.Cuenta;
 
 import java.util.ArrayList;
 
-public class AdapterCuentas extends RecyclerView.Adapter<AdapterCuentas.ViewHolderCuentas>{
+public class AdapterCuentas extends RecyclerView.Adapter<AdapterCuentas.ViewHolderCuentas> {
 
     ArrayList<Cuenta> ListaCuentas;
-    public AdapterCuentas(ArrayList<Cuenta> listaCuentas)
-    {
+
+    public AdapterCuentas(ArrayList<Cuenta> listaCuentas) {
         this.ListaCuentas = listaCuentas;
     }
 
     @NonNull
     @Override
     public AdapterCuentas.ViewHolderCuentas onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_cuentas,null,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_cuentas, null, false);
         return new ViewHolderCuentas(view);
     }
 
@@ -58,7 +58,6 @@ public class AdapterCuentas extends RecyclerView.Adapter<AdapterCuentas.ViewHold
         //variables locales
         TextView dni, cuenta, nombre, saldo;
         Button btndetalle;
-
         Context context;
 
         public ViewHolderCuentas(@NonNull View itemView) {
@@ -73,19 +72,19 @@ public class AdapterCuentas extends RecyclerView.Adapter<AdapterCuentas.ViewHold
             btndetalle = (Button) itemView.findViewById(R.id.btnDetalle);
         }
 
-        void setOnClickListeners(){
+        void setOnClickListeners() {
             btndetalle.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
-            switch (view.getId()){
+            switch (view.getId()) {
                 case R.id.btnDetalle:
-                    Intent intent = new Intent(context,MainActivity3.class);
-                    intent.putExtra("cuenta",cuenta.getText());
-                    intent.putExtra("nombre",nombre.getText());
-                    intent.putExtra("cedula",dni.getText());
-                    intent.putExtra("saldo",saldo.getText());
+                    Intent intent = new Intent(context, MainActivity3.class);
+                    intent.putExtra("cuenta", cuenta.getText());
+                    intent.putExtra("nombre", nombre.getText());
+                    intent.putExtra("cedula", dni.getText());
+                    intent.putExtra("saldo", saldo.getText());
                     context.startActivity(intent);
                     break;
             }

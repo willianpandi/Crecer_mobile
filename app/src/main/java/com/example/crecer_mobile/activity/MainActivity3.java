@@ -31,7 +31,7 @@ import java.util.List;
 public class MainActivity3 extends AppCompatActivity {
 
     TextView txtcuenta, txtnombre, txtcedula, txtsaldo;
-    RecyclerView recyclerView;
+    RecyclerView recyclerView2;
     List<Detalle> lista;
 
     @Override
@@ -62,8 +62,8 @@ public class MainActivity3 extends AppCompatActivity {
         txtcedula = (TextView) findViewById(R.id.textView13);
         txtsaldo = (TextView) findViewById(R.id.textView15);
 
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerview_detalle);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView2 = (RecyclerView) findViewById(R.id.recyclerview_detalle);
+        recyclerView2.setLayoutManager(new LinearLayoutManager(this));
         lista = new ArrayList<Detalle>();
 
         txtcuenta.setText(cuenta);
@@ -81,7 +81,7 @@ public class MainActivity3 extends AppCompatActivity {
 
     }
 
-    ///////////////////// MUESTRA TODAS DETALLES /////////////////////////////////////
+    ///////////////////// MUESTRA TODOS LOS DETALLES /////////////////////////////////////
 
     private void mostrarDetalleCuentas(String URL) {
         StringRequest stringRequest = new StringRequest(Request.Method.GET, URL, new Response.Listener<String>() {
@@ -100,7 +100,7 @@ public class MainActivity3 extends AppCompatActivity {
                         ));
                     }
                     AdapterDetalles adapterDetalles = new AdapterDetalles((ArrayList<Detalle>) lista);
-                    recyclerView.setAdapter(adapterDetalles);
+                    recyclerView2.setAdapter(adapterDetalles);
                 }catch (JSONException e){
                     Toast.makeText(MainActivity3.this, e.toString(), Toast.LENGTH_SHORT).show();
                 }

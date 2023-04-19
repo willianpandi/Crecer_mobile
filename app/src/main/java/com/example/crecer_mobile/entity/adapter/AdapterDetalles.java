@@ -15,7 +15,6 @@ import com.example.crecer_mobile.entity.Detalle;
 import java.util.ArrayList;
 
 public class AdapterDetalles extends RecyclerView.Adapter<AdapterDetalles.ViewHolderDetalles> {
-
     ArrayList<Detalle> ListaDetalles;
     public AdapterDetalles(ArrayList<Detalle> listaDetalles){
         this.ListaDetalles = listaDetalles;
