@@ -1,9 +1,11 @@
 package com.example.crecer_mobile.activity.ui.consultas;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -64,13 +66,15 @@ public class ConsultasFragment extends Fragment {
                     lista = new ArrayList<Cuenta>();
                     buscarcuenta("https://computacionmovil2.000webhostapp.com/buscar_producto.php?id="+txtbuscar.getText().toString());
                     carga.setVisibility(View.VISIBLE);
-                    txtbuscar.setText("");
+                    //txtbuscar.setText("");
                 }
                 else
                 {
                     Toast.makeText(getActivity(), "Ingrese un número de cédula", Toast.LENGTH_SHORT).show();
                 }
+                cerrarTeclado();
             }
+
         });
         return vista;
 
@@ -112,5 +116,14 @@ public class ConsultasFragment extends Fragment {
         requestQueue.add(jsonArrayRequest);
     }
 
+
+    ///Cerrar Teclado movil
+    private void cerrarTeclado(){
+        View view = getActivity().getCurrentFocus();
+        if(view != null){
+            InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(),0);
+        }
+    }
 
 }

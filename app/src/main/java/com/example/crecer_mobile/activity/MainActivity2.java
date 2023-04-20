@@ -1,12 +1,14 @@
 package com.example.crecer_mobile.activity;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -85,7 +87,7 @@ public class MainActivity2 extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "¡Se ha producido un error al intentar loguearte!", Toast.LENGTH_SHORT).show();
                     carga.setVisibility(View.INVISIBLE);
                 }
-
+                cerrarTeclado();
             }
         });
 
@@ -210,7 +212,7 @@ public class MainActivity2 extends AppCompatActivity {
         usuario = txtuser.getText().toString();
         password = txtpass.getText().toString();
         if (usuario.isEmpty()) {
-            txtInputUsuario.setError("Ingrese su usario y/o correo electrónico");
+            txtInputUsuario.setError("Ingrese su usario");
             retorno = false;
         } else {
             txtInputUsuario.setErrorEnabled(false);
@@ -222,6 +224,16 @@ public class MainActivity2 extends AppCompatActivity {
             txtInputPassword.setErrorEnabled(false);
         }
         return retorno;
+    }
+
+
+    //Cerrar Teclado movil
+    private void cerrarTeclado(){
+        View view = this.getCurrentFocus();
+        if(view != null){
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(),0);
+        }
     }
 
     //Enables https connections

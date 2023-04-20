@@ -108,40 +108,41 @@ public class AhorroFragment extends Fragment {
         btnbuscarahorro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                switch (op) {
-                    case "uno":{
-                        carga.setVisibility(View.VISIBLE);
-                        Toast.makeText(getActivity(),"DATOS: Ahorro a la vista",Toast.LENGTH_SHORT).show();
-                        lista = new ArrayList<Ahorro>();
-                        buscarahorro("https://computacionmovil2.000webhostapp.com/buscar_ahorro.php?id="+1+"");
-                        break;
+                if (op == "uno" || op == "dos" || op == "tres" || op == "cuatro"){
+                    switch (op) {
+                        case "uno":{
+                            carga.setVisibility(View.VISIBLE);
+                            Toast.makeText(getActivity(),"DATOS: Ahorro a la vista",Toast.LENGTH_SHORT).show();
+                            lista = new ArrayList<Ahorro>();
+                            buscarahorro("https://computacionmovil2.000webhostapp.com/buscar_ahorro.php?id="+1+"");
+                            break;
+                        }
+                        case "dos":{
+                            Toast.makeText(getActivity(),"DATOS: Ahorro mi cofrecito",Toast.LENGTH_SHORT).show();
+                            lista = new ArrayList<Ahorro>();
+                            buscarahorro("https://computacionmovil2.000webhostapp.com/buscar_ahorro.php?id="+2+"");
+                            carga.setVisibility(View.VISIBLE);
+                            break;
+                        }
+                        case "tres":{
+                            Toast.makeText(getActivity(),"DATOS: Ahorro gana más",Toast.LENGTH_SHORT).show();
+                            lista = new ArrayList<Ahorro>();
+                            buscarahorro("https://computacionmovil2.000webhostapp.com/buscar_ahorro.php?id="+3+"");
+                            carga.setVisibility(View.VISIBLE);
+                            break;
+                        }
+                        case "cuatro":{
+                            Toast.makeText(getActivity(),"DATOS: Ahorro programado",Toast.LENGTH_SHORT).show();
+                            lista = new ArrayList<Ahorro>();
+                            buscarahorro("https://computacionmovil2.000webhostapp.com/buscar_ahorro.php?id="+4+"");
+                            carga.setVisibility(View.VISIBLE);
+                            break;
+                        }
                     }
-                    case "dos":{
-                        Toast.makeText(getActivity(),"DATOS: Ahorro mi cofrecito",Toast.LENGTH_SHORT).show();
-                        lista = new ArrayList<Ahorro>();
-                        buscarahorro("https://computacionmovil2.000webhostapp.com/buscar_ahorro.php?id="+2+"");
-                        carga.setVisibility(View.VISIBLE);
-                        break;
-                    }
-                    case "tres":{
-                        Toast.makeText(getActivity(),"DATOS: Ahorro gana más",Toast.LENGTH_SHORT).show();
-                        lista = new ArrayList<Ahorro>();
-                        buscarahorro("https://computacionmovil2.000webhostapp.com/buscar_ahorro.php?id="+3+"");
-                        carga.setVisibility(View.VISIBLE);
-                        break;
-                    }
-                    case "cuatro":{
-                        Toast.makeText(getActivity(),"DATOS: Ahorro programado",Toast.LENGTH_SHORT).show();
-                        lista = new ArrayList<Ahorro>();
-                        buscarahorro("https://computacionmovil2.000webhostapp.com/buscar_ahorro.php?id="+4+"");
-                        carga.setVisibility(View.VISIBLE);
-                        break;
-                    }
-                    default:{
-                        Toast.makeText(getActivity(), "Escoja una operación", Toast.LENGTH_SHORT).show();
-                        break;
-                    }
+                } else {
+                    Toast.makeText(getActivity(), "Seleccione una opción", Toast.LENGTH_SHORT).show();
                 }
+
             }
         });
 
