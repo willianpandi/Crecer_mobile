@@ -57,7 +57,7 @@
         android:id="@+id/button2"
         android:layout_width="120dp"
         android:layout_height="57dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="32dp"
         android:backgroundTint="#951F1F"
         android:drawableEnd="@drawable/places_ic_search"
         android:drawableTint="#fff"
@@ -66,7 +66,7 @@
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.872"
+        app:layout_constraintHorizontal_bias="0.869"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 

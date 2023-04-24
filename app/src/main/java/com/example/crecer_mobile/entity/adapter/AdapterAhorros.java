@@ -30,7 +30,6 @@ public class AdapterAhorros extends RecyclerView.Adapter<AdapterAhorros.ViewHold
     @Override
     public void onBindViewHolder(@NonNull AdapterAhorros.ViewHolderAhorros holder, int position) {
         holder.cuenta_ahorro.setText(String.valueOf(ListaAhorrros.get(position).getCuenta()));
-        holder.codigo.setText(String.valueOf(ListaAhorrros.get(position).getCodigo()));
         holder.detalle_ahorro.setText(ListaAhorrros.get(position).getDetalle());
         holder.deposito_ahorro.setText(String.valueOf(ListaAhorrros.get(position).getDeposito()));
         holder.fecha_ahorro.setText(ListaAhorrros.get(position).getFecha());
@@ -42,12 +41,11 @@ public class AdapterAhorros extends RecyclerView.Adapter<AdapterAhorros.ViewHold
     }
 
     public class ViewHolderAhorros extends RecyclerView.ViewHolder {
-        TextView cuenta_ahorro, codigo, detalle_ahorro, fecha_ahorro, deposito_ahorro;
+        TextView cuenta_ahorro, detalle_ahorro, fecha_ahorro, deposito_ahorro;
         public ViewHolderAhorros(@NonNull View itemView) {
             super(itemView);
 
             cuenta_ahorro = (TextView) itemView.findViewById(R.id.texView_cuenta_ahorro);
-            codigo = (TextView) itemView.findViewById(R.id.texView_codigo);
             detalle_ahorro = (TextView) itemView.findViewById(R.id.textView_detalle);
             fecha_ahorro = (TextView) itemView.findViewById(R.id.textView_fecha_ahorro);
             deposito_ahorro = (TextView) itemView.findViewById(R.id.textView_deposito_ahorro);

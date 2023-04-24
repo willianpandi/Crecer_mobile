@@ -165,6 +165,9 @@ public class MainActivity2 extends AppCompatActivity {
  */
     }
 
+
+    //METODOS PROPIOS ///////////////////////////////////////////////////////////////////////////////////////////
+
     private void validarusuario(String URL) {
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override

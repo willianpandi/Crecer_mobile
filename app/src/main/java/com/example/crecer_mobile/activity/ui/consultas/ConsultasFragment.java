@@ -34,7 +34,6 @@ import java.util.ArrayList;
 import java.util.List;
 //import com.example.crecer_mobile.databinding.FragmentGalleryBinding;
 
-
 public class ConsultasFragment extends Fragment {
 
     View vista;
@@ -66,7 +65,7 @@ public class ConsultasFragment extends Fragment {
                     lista = new ArrayList<Cuenta>();
                     buscarcuenta("https://computacionmovil2.000webhostapp.com/buscar_producto.php?id="+txtbuscar.getText().toString());
                     carga.setVisibility(View.VISIBLE);
-                    //txtbuscar.setText("");
+                    txtbuscar.setText("");
                 }
                 else
                 {
@@ -74,7 +73,6 @@ public class ConsultasFragment extends Fragment {
                 }
                 cerrarTeclado();
             }
-
         });
         return vista;
 
@@ -115,7 +113,6 @@ public class ConsultasFragment extends Fragment {
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
         requestQueue.add(jsonArrayRequest);
     }
-
 
     ///Cerrar Teclado movil
     private void cerrarTeclado(){

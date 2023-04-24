@@ -161,9 +161,9 @@ public class AhorroFragment extends Fragment {
                         jsonObject=response.getJSONObject(i);
                         lista.add(new Ahorro(
                                 jsonObject.getInt("cuenta"),
-                                jsonObject.getInt("codigo"),
+                                //jsonObject.getInt("codigo"),
                                 jsonObject.getString("detalle"),
-                                jsonObject.getString("fecha"),
+                                jsonObject.getString("fechas"),
                                 (float)jsonObject.getDouble("deposito")
                         ));
 
