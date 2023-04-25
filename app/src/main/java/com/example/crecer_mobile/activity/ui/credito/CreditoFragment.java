@@ -32,13 +32,13 @@ public class CreditoFragment extends Fragment {
 
         //enlacez
         url1 = "https://crecer.fin.ec/cotizador/MicroCalculadora.html";
-        url2 =  "https://crecer.fin.ec/wp-content/uploads/2021/08/SOLICITUD-CREDITO-2020-ENERO2.pdf";
+        url2 = "https://crecer.fin.ec/wp-content/uploads/2021/08/SOLICITUD-CREDITO-2020-ENERO2.pdf";
 
-                //boton cotizar credito
+        //boton cotizar credito
         btncotizar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Uri uri =Uri.parse(url1);
+                Uri uri = Uri.parse(url1);
                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                 startActivity(intent);
             }
@@ -48,7 +48,7 @@ public class CreditoFragment extends Fragment {
         btndescargar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Uri uri =Uri.parse(url2);
+                Uri uri = Uri.parse(url2);
                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                 startActivity(intent);
             }

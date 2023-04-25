@@ -82,7 +82,6 @@ public class MainActivity2 extends AppCompatActivity {
                         validarusuario("https://computacionmovil2.000webhostapp.com/validar_usuario.php");
                         carga.setVisibility(View.VISIBLE);
                     }
-
                 } catch (Exception e) {
                     Toast.makeText(getApplicationContext(), "¡Se ha producido un error al intentar loguearte!", Toast.LENGTH_SHORT).show();
                     carga.setVisibility(View.INVISIBLE);
@@ -231,11 +230,11 @@ public class MainActivity2 extends AppCompatActivity {
 
 
     //Cerrar Teclado movil
-    private void cerrarTeclado(){
+    private void cerrarTeclado() {
         View view = this.getCurrentFocus();
-        if(view != null){
+        if (view != null) {
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(view.getWindowToken(),0);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }
 

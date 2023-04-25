@@ -61,14 +61,12 @@ public class ConsultasFragment extends Fragment {
         btnbuscar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!txtbuscar.getText().toString().isEmpty()) {
+                if (!txtbuscar.getText().toString().isEmpty()) {
                     lista = new ArrayList<Cuenta>();
-                    buscarcuenta("https://computacionmovil2.000webhostapp.com/buscar_producto.php?id="+txtbuscar.getText().toString());
+                    buscarcuenta("https://computacionmovil2.000webhostapp.com/buscar_producto.php?id=" + txtbuscar.getText().toString());
                     carga.setVisibility(View.VISIBLE);
                     txtbuscar.setText("");
-                }
-                else
-                {
+                } else {
                     Toast.makeText(getActivity(), "Ingrese un número de cédula", Toast.LENGTH_SHORT).show();
                 }
                 cerrarTeclado();
@@ -79,23 +77,23 @@ public class ConsultasFragment extends Fragment {
     }
 
     ///////////// BUSCA CUENTA POR NUMERO DE CEDULA ////////////
-    private void buscarcuenta(String URL){
+    private void buscarcuenta(String URL) {
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(URL, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
                 Cuenta cuenta;
-               for (int i=0; i < response.length();i++){
+                for (int i = 0; i < response.length(); i++) {
                     JSONObject jsonObject = null;
                     try {
-                        jsonObject=response.getJSONObject(i);
+                        jsonObject = response.getJSONObject(i);
                         lista.add(new Cuenta(
                                 jsonObject.getInt("id"),
                                 jsonObject.getInt("n_cuenta"),
                                 jsonObject.getString("nombre"),
-                                (float)jsonObject.optDouble("saldo")
+                                (float) jsonObject.optDouble("saldo")
                         ));
 
-                    } catch (JSONException error){
+                    } catch (JSONException error) {
                         Toast.makeText(getActivity(), error.toString(), Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -103,23 +101,23 @@ public class ConsultasFragment extends Fragment {
                 recyclerView.setAdapter(adapterCuentas);
                 carga.setVisibility(View.INVISIBLE);
             }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    carga.setVisibility(View.INVISIBLE);
-                    Toast.makeText(getActivity(),"No Existe el Dato",Toast.LENGTH_SHORT).show();
-                }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                carga.setVisibility(View.INVISIBLE);
+                Toast.makeText(getActivity(), "No Existe el Dato", Toast.LENGTH_SHORT).show();
+            }
         });
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
         requestQueue.add(jsonArrayRequest);
     }
 
     ///Cerrar Teclado movil
-    private void cerrarTeclado(){
+    private void cerrarTeclado() {
         View view = getActivity().getCurrentFocus();
-        if(view != null){
+        if (view != null) {
             InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(view.getWindowToken(),0);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }
 

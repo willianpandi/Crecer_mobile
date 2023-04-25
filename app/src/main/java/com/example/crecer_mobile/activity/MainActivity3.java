@@ -48,9 +48,9 @@ public class MainActivity3 extends AppCompatActivity {
         //getSupportActionBar().setIcon(R.drawable.ic_usuario);
 
         //Traer datos del adapter
-        String cuenta = "", nombre =" ", cedula="", saldo="";
+        String cuenta = "", nombre = " ", cedula = "", saldo = "";
         Bundle extras = getIntent().getExtras();
-        if (extras != null){
+        if (extras != null) {
             cuenta = extras.getString("cuenta");
             nombre = extras.getString("nombre");
             cedula = extras.getString("cedula");
@@ -90,25 +90,25 @@ public class MainActivity3 extends AppCompatActivity {
                 Detalle detalle;
                 try {
                     JSONArray jsonArray = new JSONArray(response);
-                    for (int i =0; i< jsonArray.length(); i++) {
+                    for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
                         lista.add(new Detalle(
                                 jsonObject.getInt("id"),
                                 jsonObject.getInt("n_cuenta"),
-                                (float)jsonObject.optDouble("saldo")
+                                (float) jsonObject.optDouble("saldo")
 
                         ));
                     }
                     AdapterDetalles adapterDetalles = new AdapterDetalles((ArrayList<Detalle>) lista);
                     recyclerView2.setAdapter(adapterDetalles);
-                }catch (JSONException e){
+                } catch (JSONException e) {
                     Toast.makeText(MainActivity3.this, e.toString(), Toast.LENGTH_SHORT).show();
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(MainActivity3.this,error.toString(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity3.this, error.toString(), Toast.LENGTH_SHORT).show();
             }
 
         });

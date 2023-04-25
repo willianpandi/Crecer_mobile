@@ -64,7 +64,7 @@ public class InicioActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.cerrarSesion:
                 this.logout();
                 break;

@@ -18,6 +18,8 @@ public class ConfiguracionFragment extends Fragment {
                              Bundle savedInstanceState) {
         vista = inflater.inflate(R.layout.fragment_configuracion, container, false);
 
+
+
         return vista;
     }
 

@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Ahorro {
     private int cuenta;
-    private  String detalle;
+    private String detalle;
     private String fecha;
     private float deposito;
 

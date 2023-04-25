@@ -23,11 +23,15 @@ public class App extends Application {
         );
     }
 
-    public static class SampleDumperPluginsProvider implements DumperPluginsProvider{
+    public static class SampleDumperPluginsProvider implements DumperPluginsProvider {
         private Context context;
-        public SampleDumperPluginsProvider(Context context) {this.context=context;}
+
+        public SampleDumperPluginsProvider(Context context) {
+            this.context = context;
+        }
+
         @Override
-        public Iterable<DumperPlugin> get(){
+        public Iterable<DumperPlugin> get() {
             return Stetho.defaultDumperPluginsProvider(context).get();
         }
     }
