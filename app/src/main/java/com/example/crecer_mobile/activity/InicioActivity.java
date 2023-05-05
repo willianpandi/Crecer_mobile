@@ -1,14 +1,17 @@
 package com.example.crecer_mobile.activity;
 
+import android.app.FragmentManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
 import android.widget.Toast;
 
 import com.example.crecer_mobile.R;
+import com.example.crecer_mobile.activity.ui.inicio.InicioFragment;
 import com.example.crecer_mobile.databinding.ActivityInicioBinding;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.Snackbar;
@@ -53,6 +56,7 @@ public class InicioActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_inicio);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
     }
 
     @Override
@@ -126,4 +130,36 @@ public class InicioActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
+//cerrar la aplicacion desde el inicio de la aplicacion dando doble click
+    /*
+    private static final int Intervalo = 2000;
+    private  long tiempoPrimerClik;
+
+    @Override
+    public void onBackPressed() {
+        if (tiempoPrimerClik + Intervalo > System.currentTimeMillis()){
+            super.onBackPressed();
+            return;
+        } else {
+            Toast.makeText(this, "Vuelva a presionar para salir de la aplicación", Toast.LENGTH_SHORT).show();
+        }
+        tiempoPrimerClik = System.currentTimeMillis();
+    }*/
+    /*
+private static long presionado;
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        FragmentManager manager = getFragmentManager();
+        if (manager.getBackStackEntryCount()>0)
+            super.onBackPressed();
+        else {
+            if (presionado + 1000 > System.currentTimeMillis())
+                super.onBackPressed();
+            else
+                Toast.makeText(this, "Vuelve a presionar para salir", Toast.LENGTH_SHORT).show();
+            presionado = System.currentTimeMillis();
+        }
+    }*/
 }

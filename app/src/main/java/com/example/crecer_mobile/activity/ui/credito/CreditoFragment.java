@@ -53,8 +53,6 @@ public class CreditoFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
-
         return vista;
     }
 }

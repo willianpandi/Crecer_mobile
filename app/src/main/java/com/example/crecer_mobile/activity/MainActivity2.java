@@ -1,6 +1,7 @@
 package com.example.crecer_mobile.activity;
 
 import android.annotation.SuppressLint;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -41,7 +42,6 @@ import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
-import retrofit2.http.Url;
 
 public class MainActivity2 extends AppCompatActivity {
     EditText txtuser, txtpass;
@@ -164,7 +164,6 @@ public class MainActivity2 extends AppCompatActivity {
  */
     }
 
-
     //METODOS PROPIOS ///////////////////////////////////////////////////////////////////////////////////////////
 
     private void validarusuario(String URL) {
@@ -268,5 +267,21 @@ public class MainActivity2 extends AppCompatActivity {
         } catch (Exception ignored) {
         }
     }
-}
 
+    private static long presionado;
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        FragmentManager manager = getFragmentManager();
+        if (manager.getBackStackEntryCount()>0)
+            super.onBackPressed();
+        else {
+            if (presionado + 2000 > System.currentTimeMillis())
+                super.onBackPressed();
+            else
+                Toast.makeText(this, "Vuelve a presionar para salir de la aplicación", Toast.LENGTH_SHORT).show();
+            presionado = System.currentTimeMillis();
+        }
+    }
+}

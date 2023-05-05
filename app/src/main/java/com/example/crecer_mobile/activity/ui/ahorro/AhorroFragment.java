@@ -158,7 +158,6 @@ public class AhorroFragment extends Fragment {
             }
         });
 
-
         //Boton calendario
         btncalendario.setOnClickListener(new View.OnClickListener() {
             @Override

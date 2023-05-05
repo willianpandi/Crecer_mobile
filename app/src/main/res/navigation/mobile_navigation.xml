@@ -8,37 +8,37 @@
     <fragment
         android:id="@+id/nav_inicio"
         android:name="com.example.crecer_mobile.activity.ui.inicio.InicioFragment"
-        android:label="INICIO"
+        android:label="Inicio"
         tools:layout="@layout/fragment_inicio" />
 
     <fragment
         android:id="@+id/nav_consultas"
         android:name="com.example.crecer_mobile.activity.ui.consultas.ConsultasFragment"
-        android:label="CONSULTAS"
+        android:label="Consulta de cuenta"
         tools:layout="@layout/fragment_consulta" />
 
     <fragment
         android:id="@+id/nav_ahorro"
         android:name="com.example.crecer_mobile.activity.ui.ahorro.AhorroFragment"
-        android:label="AHORROS"
+        android:label="Ahorros"
         tools:layout="@layout/fragment_ahorro" />
 
     <fragment
         android:id="@+id/nav_creditos"
         android:name="com.example.crecer_mobile.activity.ui.credito.CreditoFragment"
-        android:label="CREDITOS"
+        android:label="Créditos"
         tools:layout="@layout/fragment_credito" />
 
     <fragment
         android:id="@+id/nav_inversiones"
         android:name="com.example.crecer_mobile.activity.ui.inversion.InversionFragment"
-        android:label="INVERSIONES"
+        android:label="Inversiones"
         tools:layout="@layout/fragment_inversion" />
 
     <fragment
         android:id="@+id/nav_configuracion"
         android:name="com.example.crecer_mobile.activity.ui.configuracion.ConfiguracionFragment"
-        android:label="CONFIGURACIÓN"
+        android:label="Configuración de cuenta"
         tools:layout="@layout/fragment_configuracion" />
 
 </navigation>

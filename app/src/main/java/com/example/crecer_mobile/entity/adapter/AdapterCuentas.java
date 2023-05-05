@@ -45,7 +45,6 @@ public class AdapterCuentas extends RecyclerView.Adapter<AdapterCuentas.ViewHold
         holder.saldo.setText(String.valueOf(ListaCuentas.get(position).getSaldo()));
 
         holder.setOnClickListeners();
-
     }
 
     @Override

@@ -120,5 +120,4 @@ public class ConsultasFragment extends Fragment {
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }
-
 }
