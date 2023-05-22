@@ -32,7 +32,7 @@ public class AdapterAhorros extends RecyclerView.Adapter<AdapterAhorros.ViewHold
         holder.cuenta_ahorro.setText(String.valueOf(ListaAhorrros.get(position).getCuenta()));
         holder.detalle_ahorro.setText(ListaAhorrros.get(position).getDetalle());
         holder.deposito_ahorro.setText(String.valueOf(ListaAhorrros.get(position).getDeposito()));
-        holder.fecha_ahorro.setText(ListaAhorrros.get(position).getFecha());
+        //holder.fecha_ahorro.setText(ListaAhorrros.get(position).getFecha());
     }
 
     @Override
@@ -47,7 +47,7 @@ public class AdapterAhorros extends RecyclerView.Adapter<AdapterAhorros.ViewHold
 
             cuenta_ahorro = (TextView) itemView.findViewById(R.id.texView_cuenta_ahorro);
             detalle_ahorro = (TextView) itemView.findViewById(R.id.textView_detalle);
-            fecha_ahorro = (TextView) itemView.findViewById(R.id.textView_fecha_ahorro);
+            //fecha_ahorro = (TextView) itemView.findViewById(R.id.textView_fecha_ahorro);
             deposito_ahorro = (TextView) itemView.findViewById(R.id.textView_deposito_ahorro);
         }
     }

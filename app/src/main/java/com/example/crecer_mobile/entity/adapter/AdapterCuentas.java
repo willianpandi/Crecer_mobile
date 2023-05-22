@@ -42,7 +42,7 @@ public class AdapterCuentas extends RecyclerView.Adapter<AdapterCuentas.ViewHold
         holder.dni.setText(String.valueOf(ListaCuentas.get(position).getN_cuenta()));
         holder.cuenta.setText(String.valueOf(ListaCuentas.get(position).getId()));
         holder.nombre.setText(ListaCuentas.get(position).getNombre());
-        holder.saldo.setText(String.valueOf(ListaCuentas.get(position).getSaldo()));
+        holder.saldo.setText(String.valueOf(ListaCuentas.get(position).getCorreo()));
 
         holder.setOnClickListeners();
     }

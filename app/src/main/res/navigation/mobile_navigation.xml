@@ -14,7 +14,7 @@
     <fragment
         android:id="@+id/nav_consultas"
         android:name="com.example.crecer_mobile.activity.ui.consultas.ConsultasFragment"
-        android:label="Consulta de cuenta"
+        android:label="Consultas"
         tools:layout="@layout/fragment_consulta" />
 
     <fragment
@@ -38,7 +38,7 @@
     <fragment
         android:id="@+id/nav_configuracion"
         android:name="com.example.crecer_mobile.activity.ui.configuracion.ConfiguracionFragment"
-        android:label="Configuración de cuenta"
+        android:label="Configuración"
         tools:layout="@layout/fragment_configuracion" />
 
 </navigation>

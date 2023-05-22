@@ -5,13 +5,11 @@ import java.util.Date;
 public class Ahorro {
     private int cuenta;
     private String detalle;
-    private String fecha;
     private float deposito;
 
-    public Ahorro(int cuenta, String detalle, String fecha, float deposito) {
+    public Ahorro(int cuenta, String detalle, float deposito) {
         this.cuenta = cuenta;
         this.detalle = detalle;
-        this.fecha = fecha;
         this.deposito = deposito;
     }
 
@@ -37,13 +35,5 @@ public class Ahorro {
 
     public void setDeposito(float deposito) {
         this.deposito = deposito;
-    }
-
-    public String getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(String fecha) {
-        this.fecha = fecha;
     }
 }

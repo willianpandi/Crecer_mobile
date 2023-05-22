@@ -15,7 +15,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -29,6 +31,7 @@ import android.graphics.pdf.PdfDocument;
 import android.media.Image;
 import android.os.Bundle;
 import android.os.Environment;
+import android.preference.PreferenceManager;
 import android.text.TextPaint;
 import android.util.Log;
 import android.view.View;
@@ -36,8 +39,11 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.NetworkError;
 import com.android.volley.Request;
 import com.android.volley.Response;
+import com.android.volley.ServerError;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -45,6 +51,7 @@ import com.example.crecer_mobile.R;
 import com.example.crecer_mobile.activity.ui.consultas.ConsultasFragment;
 import com.example.crecer_mobile.entity.Detalle;
 import com.example.crecer_mobile.entity.adapter.AdapterDetalles;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -90,13 +97,12 @@ public class MainActivity3 extends AppCompatActivity {
     List<Detalle> lista;
     Button btnPDF;
     Bitmap bitmap, bitmap2, bitmapEscala, bitmapEscala2;
-    int pageWith = 1200;
+    int pageWith = 1400;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main3);
-
 
         //cambiar el tema de la pantalla accion bar
         getSupportActionBar().setTitle("Detalle de Cuenta");
@@ -131,9 +137,7 @@ public class MainActivity3 extends AppCompatActivity {
         txtsaldo.setText(saldo);
 
         bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.logo_crecer);
-        bitmapEscala = Bitmap.createScaledBitmap(bitmap, 350, 100, false);
-
-        //bitmapEscala2 = Bitmap.createScaledBitmap(bitmap2, 500, 500, false);
+        bitmapEscala = Bitmap.createScaledBitmap(bitmap, 350, 115, false);
 
         //PDF
         ActivityCompat.requestPermissions(this, new String[]{
@@ -142,7 +146,7 @@ public class MainActivity3 extends AppCompatActivity {
         createPDF();
 
         //Mostrar detalle
-        mostrarDetalleCuentas("https://computacionmovil2.000webhostapp.com/mostrar_productos.php");
+        mostrarDetalleCuentas("https://computacionmovil2.000webhostapp.com/mostrar_cuentas.php");
 
     }
 
@@ -171,11 +175,48 @@ public class MainActivity3 extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(MainActivity3.this, error.toString(), Toast.LENGTH_SHORT).show();
+                if (error instanceof NetworkError) {
+                    Toast.makeText(getApplicationContext(), "En este momento no tienes conexión a internet", Toast.LENGTH_SHORT).show();
+                } else if (error instanceof TimeoutError) {
+                    Toast.makeText(getApplicationContext(), "Tiempo de espera excedido", Toast.LENGTH_SHORT).show();
+                } else if (error instanceof ServerError) {
+                    Toast.makeText(getApplicationContext(), "Error del servidor", Toast.LENGTH_SHORT).show();
+                } else Toast.makeText(MainActivity3.this, error.toString(), Toast.LENGTH_SHORT).show();
             }
 
         });
         Volley.newRequestQueue(MainActivity3.this).add(stringRequest);
+    }
+
+    //cerrar sesion despues de un tiempo
+    @Override
+    public void onResume() {
+        super.onResume();
+        someOtherMethod();
+    }
+    private static final long MAX_SESSION_TIME = 600; // tiempo máximo de validez en segundos
+    public void someOtherMethod() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        long sessionStartTime = sharedPreferences.getLong("session_start_time", 0);
+        long currentTime = System.currentTimeMillis();
+        long sessionTime = (currentTime - sessionStartTime) / 1000; // tiempo transcurrido en segundos
+        boolean isSessionValid = sessionTime < MAX_SESSION_TIME; // MAX_SESSION_TIME es el tiempo máximo de validez en segundos
+        // hacer algo con el resultado de isSessionValid
+        if (!isSessionValid) {
+            MaterialAlertDialogBuilder alerta = new MaterialAlertDialogBuilder(this);
+            alerta.setTitle("Tu sesión ha expirado!")
+                    .setIcon(R.drawable.ic_error)
+                    .setMessage("Por seguridad hemos cerrado tu sesión, debido a que excediste tu límite de tiempo.")
+                    .setCancelable(false)
+                    .setPositiveButton("Salir", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            Toast.makeText(MainActivity3.this, "¡GRACIAS! por utilizar Crecer Móvil".toString(), Toast.LENGTH_SHORT).show();
+                            System.exit(0);
+                        }
+                    });
+            alerta.show();
+        }
     }
 
     //Metodo de PDF
@@ -187,85 +228,79 @@ public class MainActivity3 extends AppCompatActivity {
                 Paint paint = new Paint();
 
                 //Ancho y largo de la hoja
-                PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo.Builder(1200, 2010, 1).create();
+                PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo.Builder(1400, 2400, 1).create();
                 PdfDocument.Page pagina1 = pdfDocument.startPage(pageInfo);
                 Canvas canvas = pagina1.getCanvas();
 
                 //Logo en PDF
                 canvas.drawBitmap(bitmapEscala, 50, 50, paint);
 
-                //Nombre de la coac
-                paint.setTextAlign(Paint.Align.RIGHT);
-                paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
-                paint.setTextSize(30);
-                canvas.drawText("Dirección: Av. 12 de Noviembre y Juan Montalvo(esquina)", pageWith - 50, 1970, paint);
-
+                //datos generales
                 paint.setTextAlign(Paint.Align.RIGHT);
                 paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
                 paint.setColor(Color.rgb(149, 31, 31));
                 paint.setTextSize(60);
-                canvas.drawText("Crecer Móvil", pageWith - 50, 115, paint);
+                canvas.drawText("Crecer Móvil", pageWith - 50, 90, paint);
+                paint.setTextSize(40);
+                paint.setColor(Color.BLACK);
+                canvas.drawText("Detalle de Cuenta", pageWith -50, 140, paint);
 
                 paint.setTextAlign(Paint.Align.CENTER);
-                paint.setTextSize(50);
-                paint.setColor(Color.BLACK);
-                canvas.drawText("Detalle de Cuenta", pageInfo.getPageWidth() / 2, 240, paint);
-
-                paint.setTextAlign(Paint.Align.LEFT);
                 paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
                 paint.setTextSize(40);
                 paint.setColor(Color.rgb(122, 119, 119));
-                canvas.drawText("Datos Generales:", 50, 320, paint);
+                canvas.drawText("Datos Generales", pageInfo.getPageWidth() / 2, 250, paint);
 
                 paint.setTextAlign(Paint.Align.LEFT);
                 paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
                 paint.setTextSize(35f);
                 paint.setColor(Color.BLACK);
-                canvas.drawText("Cuenta:", 50, 380, paint);
-                canvas.drawText("Cédula:", 50, 430, paint);
-                canvas.drawText("Cliente:", 50, 480, paint);
+                canvas.drawText("Cuenta:", 100, 300, paint);
+                canvas.drawText("Cédula:", 100, 350, paint);
+                canvas.drawText("Cliente:", 100, 400, paint);
 
                 paint.setTextAlign(Paint.Align.LEFT);
                 paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
                 paint.setTextSize(30f);
                 paint.setColor(Color.BLACK);
-                canvas.drawText("" + txtcuenta.getText(), 180, 380, paint);
-                canvas.drawText("" + txtcedula.getText(), 180, 430, paint);
-                canvas.drawText("" + txtnombre.getText(), 180, 480, paint);
+                canvas.drawText("" + txtcuenta.getText(), 230, 300, paint);
+                canvas.drawText("" + txtcedula.getText(), 230, 350, paint);
+                canvas.drawText("" + txtnombre.getText(), 230, 400, paint);
 
                 paint.setTextAlign(Paint.Align.RIGHT);
                 paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
                 paint.setColor(Color.BLACK);
                 paint.setTextSize(35f);
-                canvas.drawText("Fecha:", pageWith - 220, 380, paint);
-                canvas.drawText("Hora:", pageWith - 240, 430, paint);
+                canvas.drawText("Fecha:", pageWith - 270, 300, paint);
+                canvas.drawText("Hora:", pageWith - 290, 350, paint);
 
                 paint.setTextAlign(Paint.Align.RIGHT);
                 paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.NORMAL));
                 paint.setTextSize(30f);
                 paint.setColor(Color.BLACK);
                 SimpleDateFormat sdfecha = new SimpleDateFormat("dd/MM/" + 20 + "yy", Locale.getDefault());
-                canvas.drawText("" + sdfecha.format(Calendar.getInstance().getTime()), pageWith - 50, 380, paint);
+                canvas.drawText("" + sdfecha.format(Calendar.getInstance().getTime()), pageWith - 100, 300, paint);
                 SimpleDateFormat sdfhora = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
-                canvas.drawText("" + sdfhora.format(Calendar.getInstance().getTime()), pageWith - 90, 430, paint);
+                canvas.drawText("" + sdfhora.format(Calendar.getInstance().getTime()), pageWith - 140, 350, paint);
 
+                //cuadro
                 paint.setStyle(Paint.Style.STROKE);
                 paint.setStrokeWidth(2);
-                canvas.drawRect(20, 550, pageWith - 20, 630, paint);
+                canvas.drawRect(20, 440, pageWith - 20, 500, paint);
 
                 paint.setTextAlign(Paint.Align.LEFT);
                 paint.setTypeface(Typeface.create(Typeface.DEFAULT, Typeface.BOLD));
                 paint.setStyle(Paint.Style.FILL);
                 paint.setColor(Color.BLACK);
                 paint.setTextSize(35f);
-                canvas.drawText("Cuenta", 40, 600, paint);
-                canvas.drawText("Nombre y Apellido", 250, 600, paint);
-                canvas.drawText("Cédula", 700, 600, paint);
-                canvas.drawText("Saldo", 950, 600, paint);
+                canvas.drawText("Cuenta", 40, 480, paint);
+                canvas.drawText("Nombre y Apellido", 250, 480, paint);
+                canvas.drawText("Cédula", 700, 480, paint);
+                canvas.drawText("Saldo", 950, 480, paint);
 
-                canvas.drawLine(230, 550, 230, 630, paint);
-                canvas.drawLine(680, 550, 680, 630, paint);
-                canvas.drawLine(930, 550, 930, 630, paint);
+                canvas.drawLine(230, 440, 230, 500, paint);
+                canvas.drawLine(680, 440, 680, 500, paint);
+                canvas.drawLine(930, 440, 930, 500, paint);
 
                 int width = canvas.getWidth();
                 int height = canvas.getHeight();
@@ -273,12 +308,12 @@ public class MainActivity3 extends AppCompatActivity {
 
                 Canvas canvas3 = new Canvas(bitmap2);
                 recyclerView2.draw(canvas3);
-                canvas.drawBitmap(bitmap2,20,640,null);
+                canvas.drawBitmap(bitmap2,100,501,null);
 
                 pdfDocument.finishPage(pagina1);
 
 //////////////////      PAGINA 2     //////////////////////////////////
-                PdfDocument.PageInfo pageInfo2 = new PdfDocument.PageInfo.Builder(1200,2010,1).create();
+             /*   PdfDocument.PageInfo pageInfo2 = new PdfDocument.PageInfo.Builder(1200,2010,1).create();
                 PdfDocument.Page pagina2 = pdfDocument.startPage(pageInfo2);
                 Canvas canvas2 = pagina2.getCanvas();
 
@@ -288,18 +323,17 @@ public class MainActivity3 extends AppCompatActivity {
                 canvas2.drawText("Dirección: Av. 12 de Noviembre y Juan Montalvo(esquina)", pageWith - 50, 1970, paint);
 
 
-                pdfDocument.finishPage(pagina2);
+                pdfDocument.finishPage(pagina2);*/
 
 
                 //// GENERA EL ARCHIVO /////////////////////
                 SimpleDateFormat sdf = new SimpleDateFormat("HH-mm-ss - dd-MM-yyyy", Locale.getDefault());
-                String pdfName = "DetalleCuenta_"
-                        + sdf.format(Calendar.getInstance().getTime()) + ".pdf";
+                String pdfName = "DetalleCuenta_" + sdf.format(Calendar.getInstance().getTime()) + ".pdf";
 
                 File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString(), pdfName);
                 try {
                     pdfDocument.writeTo(new FileOutputStream(file));
-                    Toast.makeText(MainActivity3.this, "Se creo el archivo PDF correctamente", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity3.this, "Se completó la descarga: "+pdfName, Toast.LENGTH_SHORT).show();
                 } catch (Exception e){
                     e.printStackTrace();
                 }

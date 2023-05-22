@@ -1,9 +1,14 @@
 package com.example.crecer_mobile.activity;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.app.FragmentManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
@@ -17,11 +22,15 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.ServerError;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -59,10 +68,10 @@ public class MainActivity2 extends AppCompatActivity {
         btnIngresar = (Button) findViewById(R.id.button);
         carga = (CircularProgressIndicator) findViewById(R.id.progresbar);
 
-        txtuser = findViewById(R.id.edtUser);
-        txtpass = findViewById(R.id.edtPassword);
-        txtInputUsuario = findViewById(R.id.editTextTextPersonName);
-        txtInputPassword = findViewById(R.id.editTextTextPassword);
+        txtuser = (EditText) findViewById(R.id.edtUser);
+        txtpass = (EditText) findViewById(R.id.edtPassword);
+        txtInputUsuario = (TextInputLayout) findViewById(R.id.editTextTextPersonName);
+        txtInputPassword = (TextInputLayout) findViewById(R.id.editTextTextPassword);
 
         imageViewTwitter = (ImageView) findViewById(R.id.imagetwitter);
         imageViewFacebook = (ImageView) findViewById(R.id.imagefacebook);
@@ -171,7 +180,12 @@ public class MainActivity2 extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 if (!response.isEmpty()) {
-                    startActivity(new Intent(MainActivity2.this, InicioActivity.class));
+                    startActivity(new Intent(MainActivity2.this, MainActivity4.class));
+                    String texto = txtuser.getText().toString();
+                    SharedPreferences preferences = getSharedPreferences("preferences", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putString("string",texto);
+                    editor.commit();
                     finish();
                     carga.setVisibility(View.INVISIBLE);
                 } else {
@@ -189,7 +203,15 @@ public class MainActivity2 extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(MainActivity2.this, error.toString(), Toast.LENGTH_SHORT).show();
+                if (error instanceof NetworkError) {
+                    Toast.makeText(getApplicationContext(), "En este momento no tienes conexión a internet", Toast.LENGTH_SHORT).show();
+                } else if (error instanceof TimeoutError) {
+                    Toast.makeText(getApplicationContext(), "Tiempo de espera excedido", Toast.LENGTH_SHORT).show();
+                } else if (error instanceof ServerError) {
+                    Toast.makeText(getApplicationContext(), "Error del servidor", Toast.LENGTH_SHORT).show();
+                } else if (error instanceof AuthFailureError) {
+                    Toast.makeText(getApplicationContext(), "Credenciales incorrectas", Toast.LENGTH_SHORT).show();
+                }
                 carga.setVisibility(View.INVISIBLE);
             }
         }) {
@@ -204,7 +226,6 @@ public class MainActivity2 extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
     }
-
 
     //METODO PARA VALIDAR los campos
     private boolean validar() {
@@ -269,18 +290,18 @@ public class MainActivity2 extends AppCompatActivity {
     }
 
     private static long presionado;
-
     @Override
     public void onBackPressed() {
         //super.onBackPressed();
         FragmentManager manager = getFragmentManager();
-        if (manager.getBackStackEntryCount()>0)
+        if (manager.getBackStackEntryCount()>0) {
             super.onBackPressed();
+        }
         else {
             if (presionado + 2000 > System.currentTimeMillis())
                 super.onBackPressed();
             else
-                Toast.makeText(this, "Vuelve a presionar para salir de la aplicación", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Toque de nuevo para salir de Crecer Móvil", Toast.LENGTH_SHORT).show();
             presionado = System.currentTimeMillis();
         }
     }

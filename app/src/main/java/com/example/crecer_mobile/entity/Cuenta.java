@@ -4,13 +4,13 @@ public class Cuenta {
     private int id;
     private int n_cuenta;
     private String nombre;
-    private float saldo;
+    private String correo;
 
-    public Cuenta(int id, int n_cuenta, String nombre, float saldo) {
+    public Cuenta(int id, int n_cuenta, String nombre, String correo) {
         this.id = id;
         this.n_cuenta = n_cuenta;
         this.nombre = nombre;
-        this.saldo = saldo;
+        this.correo = correo;
     }
 
     public int getId() {
@@ -37,11 +37,11 @@ public class Cuenta {
         this.nombre = nombre;
     }
 
-    public float getSaldo() {
-        return saldo;
+    public String getCorreo(){
+        return correo;
     }
 
-    public void setSaldo(float saldo) {
-        this.saldo = saldo;
+    public  void setCorreo (String correo) {
+        this.correo = correo;
     }
 }

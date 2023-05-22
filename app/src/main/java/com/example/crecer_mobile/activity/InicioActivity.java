@@ -1,10 +1,11 @@
 package com.example.crecer_mobile.activity;
 
-import android.app.FragmentManager;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
@@ -18,6 +19,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -38,13 +40,29 @@ public class InicioActivity extends AppCompatActivity {
         binding = ActivityInicioBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setSupportActionBar(binding.appBarInicio.toolbar);
+
+
+        ///boton de preguntar
+        /*
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="@dimen/fab_margin"
+        android:layout_marginBottom="16dp"
+        app:backgroundTint="#00BCD4"
+        app:srcCompat="@drawable/ic_pregunta" />
+
         binding.appBarInicio.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Soy el botón flotante", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
-        });
+        });*/
+
+
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
         // Passing each menu ID as a set of Ids because each
@@ -83,7 +101,7 @@ public class InicioActivity extends AppCompatActivity {
         MaterialAlertDialogBuilder alerta = new MaterialAlertDialogBuilder(InicioActivity.this);
         alerta.setTitle("Salir de la aplicación")
                 .setIcon(R.drawable.ic_error)
-                .setMessage("¿Estas seguro que deseas salir de la aplicación de Crecer Móvil?")
+                .setMessage("¿Estas seguro que deseas salir de la aplicación Crecer Móvil?")
                 .setCancelable(false)
                 .setPositiveButton("Salir", new DialogInterface.OnClickListener() {
                     @Override

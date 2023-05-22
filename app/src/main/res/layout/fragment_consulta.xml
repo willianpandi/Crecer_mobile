@@ -1,103 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/ic_launcher_background"
     tools:context=".activity.ui.consultas.ConsultasFragment">
 
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="94dp"
-        android:layout_height="53dp"
-        android:layout_marginTop="20dp"
-        android:text="Consulta de saldos"
-        android:textAlignment="textEnd"
-        android:textColor="#951F1F"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.391"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/editTextTextPersonName_busqueda"
-        android:layout_width="200dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="34dp"
-        android:layout_marginRight="5dp"
-        app:boxBackgroundColor="#FFFFFF"
-        app:boxBackgroundMode="outline"
-        app:boxStrokeColor="#8BC34A"
-        app:counterEnabled="true"
-        app:counterMaxLength="10"
-        app:endIconMode="clear_text"
-        app:helperTextEnabled="true"
-        app:helperTextTextColor="#0B0A0A"
-        app:hintTextColor="#000000"
-        app:layout_constraintEnd_toStartOf="@+id/button2"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
-        app:startIconDrawable="@drawable/ic_num_cedula"
-        app:startIconTint="#000000">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edtbusqueda"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:hint="Número de cédula"
-            android:inputType="none|number"
-            android:textSize="16sp" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="120dp"
-        android:layout_height="57dp"
-        android:layout_marginTop="32dp"
-        android:backgroundTint="#951F1F"
-        android:drawableEnd="@drawable/places_ic_search"
-        android:drawableTint="#fff"
-        android:text="Buscar"
-        android:textAllCaps="false"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.869"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
-
-    <com.google.android.material.progressindicator.LinearProgressIndicator
-        android:id="@+id/carga_lineal"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="1dp"
-        android:indeterminate="true"
-        android:visibility="invisible"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/carga_lineal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:visibility="invisible"/>
 
-    <ImageView
-        android:id="@+id/imageView9"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginTop="8dp"
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="#F2DA86"
+            android:gravity="center"
+            android:text="Consulta de Cuentas"
+            android:textColor="#951F1F"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-        android:src="@drawable/icon_consulta"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.076"
-        app:layout_constraintStart_toEndOf="@+id/textView4"
-        app:layout_constraintTop_toTopOf="parent" />
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:orientation="horizontal"
+           android:gravity="center_horizontal">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerview_cuentas"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentBottom="true"
-        app:layout_constraintTop_toBottomOf="@+id/button2"
-        android:layout_marginTop="190dp"
-        tools:listitem="@layout/item_cuentas" />
+           <com.google.android.material.textfield.TextInputLayout
+               android:id="@+id/editTextTextPersonName_busqueda"
+               android:layout_width="200dp"
+               android:layout_height="75dp"
+               android:layout_marginTop="10dp"
+               android:layout_marginRight="5dp"
+               app:boxBackgroundColor="#FFFFFF"
+               app:boxBackgroundMode="outline"
+               app:boxStrokeColor="#8BC34A"
+               app:counterEnabled="true"
+               app:counterMaxLength="10"
+               app:endIconMode="clear_text"
+               app:helperTextEnabled="true"
+               app:helperTextTextColor="#0B0A0A"
+               app:hintTextColor="#000000"
+               app:startIconDrawable="@drawable/ic_num_cedula"
+               app:startIconTint="#000000">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+               <com.google.android.material.textfield.TextInputEditText
+                   android:id="@+id/edtbusqueda"
+                   android:layout_width="match_parent"
+                   android:layout_height="50dp"
+                   android:hint="Número de cédula"
+                   android:inputType="none|number"
+                   android:textSize="16sp" />
+           </com.google.android.material.textfield.TextInputLayout>
+
+           <Button
+               android:id="@+id/button2"
+               android:layout_width="120dp"
+               android:layout_height="50dp"
+               android:backgroundTint="#951F1F"
+               android:drawableEnd="@drawable/places_ic_search"
+               android:drawableTint="#fff"
+               android:text="Buscar"
+               android:textAllCaps="false"
+               android:textSize="14sp"
+               android:textStyle="bold" />
+       </LinearLayout>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview_cuentas"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            tools:listitem="@layout/item_cuentas" />
+    </LinearLayout>
+
+
+
+
+</androidx.core.widget.NestedScrollView>

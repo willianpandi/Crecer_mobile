@@ -1,217 +1,204 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/ic_launcher_background"
+    tools:context=".activity.ui.ahorro.AhorroFragment">
 
-    <TextView
-        android:id="@+id/textView16"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Ahorra y Contruye tu futuro"
-        android:textColor="#951F1F"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <TextView
-        android:id="@+id/textView17"
-        android:layout_width="96dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
-        android:text="Seleccione una opción:"
-        android:textAlignment="textEnd"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/radioGroup"
-        app:layout_constraintHorizontal_bias="0.576"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView16" />
-
-    <RadioGroup
-        android:id="@+id/radioGroup"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.734"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView16">
-
-        <RadioButton
-            android:id="@+id/radioButton"
-            android:layout_width="160dp"
-            android:layout_height="25dp"
-            android:text="Ahorro a la vista" />
-
-        <RadioButton
-            android:id="@+id/radioButton2"
-            android:layout_width="160dp"
-            android:layout_height="25dp"
-            android:text="Ahorro Mi cofrecito" />
-
-        <RadioButton
-            android:id="@+id/radioButton3"
-            android:layout_width="160dp"
-            android:layout_height="25dp"
-            android:text="Ahorro Gana más" />
-
-        <RadioButton
-            android:id="@+id/radioButton4"
-            android:layout_width="160dp"
-            android:layout_height="25dp"
-            android:text="Ahorro programado" />
-    </RadioGroup>
-
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="120dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="36dp"
-        android:drawableEnd="@drawable/places_ic_search"
-        android:drawableTint="#fff"
-        android:text="Buscar"
-        android:textAllCaps="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.883"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView17" />
-
-    <RelativeLayout
-        android:id="@+id/relativeLayout"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:background="#951F1F"
-        android:backgroundTintMode="src_over"
-        android:padding="5dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button3">
+        android:orientation="vertical"
+        android:gravity="center">
 
-        <LinearLayout
-            android:id="@+id/linear"
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/carga_lineal2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#951F1F"
-            android:backgroundTintMode="add"
-            android:orientation="horizontal">
+            android:indeterminate="true"
+            android:visibility="invisible" />
 
+        <TextView
+            android:id="@+id/textView16"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="#F2DA86"
+            android:gravity="center"
+            android:text="Ahorra y Contruye tu Futuro"
+            android:textColor="#951F1F"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/texViewcuenta"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="N° Cuenta"
-                android:textAlignment="center"
-                android:textColor="#fff"
-                android:textSize="14sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/textViewdetalle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="N° Detalle"
-                android:textAlignment="center"
-                android:textColor="#fff"
-                android:textSize="14sp"
-                android:textStyle="bold" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="5dp">
 
             <TextView
-                android:id="@+id/textViewfecha"
-                android:layout_width="match_parent"
+                android:id="@+id/textView17"
+                android:layout_width="96dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Fecha"
-                android:textAlignment="center"
-                android:textColor="#fff"
-                android:textSize="14sp"
+                android:layout_marginRight="15dp"
+                android:text="Seleccione una opción:"
+                android:textAlignment="textEnd"
+                android:textColor="@color/black"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
+            <RadioGroup
+                android:id="@+id/radioGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <RadioButton
+                    android:id="@+id/radioButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:text="Ahorro a la Vista" />
+
+                <RadioButton
+                    android:id="@+id/radioButton2"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:text="Ahorro Mi Cofrecito" />
+
+                <RadioButton
+                    android:id="@+id/radioButton3"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:text="Ahorro Gana Más" />
+
+                <RadioButton
+                    android:id="@+id/radioButton4"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:text="Ahorro Programado" />
+            </RadioGroup>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center" >
+
             <TextView
-                android:id="@+id/textViewdeposito"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Deposito"
-                android:textAlignment="center"
-                android:textColor="#fff"
-                android:textSize="14sp"
-                android:textStyle="bold" />
+                android:id="@+id/textViewDesde"
+                android:layout_width="55dp"
+                android:layout_height="25dp"
+                android:ems="5"
+                android:text="Desde: "
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <EditText
+                android:id="@+id/textViewCalendario"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:ems="6"
+                android:hint="aaaa-mm-dd"
+                android:inputType="date"
+                android:textAlignment="textStart"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/button6"
+                android:layout_width="35dp"
+                android:layout_height="45dp"
+                app:icon="@drawable/ic_calendario"
+                app:iconGravity="top" />
+
+
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="120dp"
+                android:layout_height="45dp"
+                android:drawableEnd="@drawable/places_ic_search"
+                android:layout_marginLeft="20dp"
+                android:drawableTint="#fff"
+                android:text="Buscar"
+                android:textAllCaps="false" />
 
         </LinearLayout>
 
-    </RelativeLayout>
 
-    <com.google.android.material.progressindicator.LinearProgressIndicator
-        android:id="@+id/carga_lineal2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="1dp"
-        android:indeterminate="true"
-        android:visibility="invisible"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="10dp" />
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="#951F1F"
+            android:backgroundTintMode="src_over">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerview_ahorro"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="255dp"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
-        app:layout_goneMarginBottom="1dp"
-        tools:layout_editor_absoluteX="1dp"
-        tools:listitem="@layout/item_ahorro"/>
+            <LinearLayout
+                android:id="@+id/linear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#951F1F"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"
+                android:backgroundTintMode="add"
+                android:orientation="horizontal">
 
+                <TextView
+                    android:id="@+id/texViewcuenta"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="N° Cuenta"
+                    android:textAlignment="textStart"
+                    android:textColor="#fff"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/button6"
-        android:layout_width="35dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="40dp"
-        app:icon="@drawable/ic_calendario"
-        app:iconGravity="top"
-        app:layout_constraintStart_toEndOf="@+id/textViewDesde"
-        app:layout_constraintTop_toBottomOf="@+id/textView17" />
+                <TextView
+                    android:id="@+id/textViewdetalle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="Detalle"
+                    android:textAlignment="textStart"
+                    android:textColor="#fff"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
 
-    <EditText
-        android:id="@+id/textViewCalendario"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_marginTop="40dp"
-        android:ems="6"
-        android:hint="aaaa-mm-dd"
-        android:inputType="date"
-        android:textAlignment="textStart"
-        android:textColor="#000000"
-        android:textSize="16sp"
-        app:layout_constraintStart_toEndOf="@+id/textViewDesde"
-        app:layout_constraintTop_toBottomOf="@+id/textView17" />
+                <TextView
+                    android:id="@+id/textViewdeposito"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Saldo Total"
+                    android:textAlignment="textStart"
+                    android:textColor="#fff"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/textViewDesde"
-        android:layout_width="55dp"
-        android:layout_height="25dp"
-        android:layout_marginTop="52dp"
-        android:ems="5"
-        android:text="Desde: "
-        android:textColor="#000000"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.095"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView17" />
+            </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        </RelativeLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerview_ahorro"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/item_ahorro"/>
+
+        <Button
+            android:id="@+id/button8"
+            android:layout_width="170dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:text="Descargar PDF"
+            android:textAllCaps="false"
+            android:textSize="12sp"
+            app:icon="@drawable/ic_descargar" />
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

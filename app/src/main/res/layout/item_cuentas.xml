@@ -8,17 +8,18 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:backgroundTint="#D9ECF4"
-        android:elevation="5dp"
-        app:cardCornerRadius="20dp">
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="5dp"
+        android:backgroundTint="#F2DA86"
+        app:cardCornerRadius="10dp">
 
         <ImageView
             android:id="@+id/imgCuenta"
             android:layout_width="90dp"
             android:layout_height="90dp"
             android:layout_gravity="center_vertical"
-            android:src="@drawable/ic_cuenta" />
+            android:src="@drawable/logo_crecer_vertical" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -31,8 +32,7 @@
                 android:id="@+id/dni"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="DNI:"
+                android:text="Cédula:"
                 android:textColor="#000"
                 android:textSize="14dp"
                 android:textStyle="bold" />
@@ -41,8 +41,7 @@
                 android:id="@+id/n_dni"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="6dp"
+                android:layout_marginLeft="55dp"
                 android:hint="Cuadro de texto"
                 android:textColor="#000"
                 android:textSize="14dp" />
@@ -52,7 +51,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/n_dni"
-                android:text="N° Cuenta:"
+                android:text="Cuenta:"
                 android:textColor="#000"
                 android:textSize="14dp"
                 android:textStyle="bold" />
@@ -62,7 +61,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/n_dni"
-                android:layout_marginLeft="70dp"
+                android:layout_marginLeft="55dp"
                 android:hint="Cuadro de texto"
                 android:textColor="#000"
                 android:textSize="14dp" />
@@ -73,7 +72,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/n_cuenta"
-                android:text="Nombre:"
+                android:text="Cliente:"
                 android:textColor="#000"
                 android:textSize="14dp"
                 android:textStyle="bold" />
@@ -83,7 +82,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/n_cuenta"
-                android:layout_marginLeft="60dp"
+                android:layout_marginLeft="55dp"
                 android:hint="Cuadro de texto"
                 android:textColor="#000"
                 android:textSize="14dp" />
@@ -94,7 +93,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/n_nombre"
-                android:text="Saldo:"
+                android:text="Correo:"
                 android:textColor="#000"
                 android:textSize="14dp"
                 android:textStyle="bold" />
@@ -104,7 +103,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/n_nombre"
-                android:layout_marginLeft="44dp"
+                android:layout_marginLeft="55dp"
                 android:hint="Cuadro de texto"
                 android:textColor="#000"
                 android:textSize="14dp" />
@@ -113,7 +112,6 @@
                 android:id="@+id/btnDetalle"
                 android:layout_width="60dp"
                 android:layout_height="35dp"
-                android:layout_alignParentTop="true"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="5dp"
                 android:backgroundTint="#951F1F"

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/ic_launcher_background"
     tools:context=".activity.MainActivity2">
 
     <LinearLayout
@@ -11,18 +12,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:orientation="vertical"
-        android:background="@color/white">
+        android:orientation="vertical">
 
         <FrameLayout
             android:layout_width="290dp"
-            android:layout_height="270dp"
+            android:layout_height="290dp"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/icon_background">
 
             <ImageView
                 android:layout_width="150dp"
-                android:layout_height="140dp"
+                android:layout_height="150dp"
                 android:layout_gravity="center"
                 app:srcCompat="@drawable/logo_crecer_vertical" />
         </FrameLayout>
@@ -48,16 +48,17 @@
         <LinearLayout
             android:id="@+id/linearParte3"
             android:layout_width="match_parent"
-            android:layout_height="221dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
                 android:gravity="center_horizontal"
-                android:orientation="horizontal"
-                android:layout_marginBottom="5dp">
+                android:orientation="horizontal">
+
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/editTextTextPersonName"
                     android:layout_width="300dp"
@@ -71,10 +72,12 @@
                     app:hintTextColor="#000000"
                     app:startIconDrawable="@drawable/ic_usuario"
                     app:startIconTint="#951F1F">
+
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/edtUser"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/black"
                         android:hint="Usuario"
                         android:textSize="16sp" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -83,9 +86,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
                 android:gravity="center_horizontal"
-                android:orientation="horizontal"
-                android:layout_marginBottom="5dp">
+                android:orientation="horizontal">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/editTextTextPassword"
@@ -105,8 +108,9 @@
                         android:id="@+id/edtPassword"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="textPassword"
                         android:hint="Contraseña"
+                        android:textColor="@color/black"
+                        android:inputType="textPassword"
                         android:textSize="16sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -156,6 +160,7 @@
                 android:layout_width="60dp"
                 android:layout_height="40dp"
                 app:srcCompat="@drawable/icon_social_twitter" />
+
             <ImageView
                 android:id="@+id/imagefacebook"
                 android:layout_width="60dp"
@@ -164,5 +169,4 @@
         </LinearLayout>
 
     </LinearLayout>
-
 </RelativeLayout>

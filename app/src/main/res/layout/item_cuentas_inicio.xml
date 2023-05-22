@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="5dp"
+        android:backgroundTint="#F2DA86"
+        app:cardCornerRadius="10dp">
+
+        <ImageView
+            android:id="@+id/imgCuenta"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/logo_crecer_vertical" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginLeft="90dp"
+            android:padding="5dp">
+
+            <TextView
+                android:id="@+id/dni"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cédula:"
+                android:textColor="#000"
+                android:textSize="14dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/h_dni"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="60dp"
+                android:hint="Cuadro de texto"
+                android:textColor="#000"
+                android:textSize="14dp" />
+
+            <TextView
+                android:id="@+id/cuenta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/h_dni"
+                android:text="Cuenta:"
+                android:textColor="#000"
+                android:textSize="14dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/h_cuenta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/h_dni"
+                android:layout_marginLeft="60dp"
+                android:hint="Cuadro de texto"
+                android:textColor="#000"
+                android:textSize="14dp" />
+
+
+            <TextView
+                android:id="@+id/nombre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/h_cuenta"
+                android:text="Cliente:"
+                android:textColor="#000"
+                android:textSize="14dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/h_nombre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/h_cuenta"
+                android:layout_marginLeft="60dp"
+                android:hint="Cuadro de texto"
+                android:textColor="#000"
+                android:textSize="14dp" />
+
+
+            <TextView
+                android:id="@+id/email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/h_nombre"
+                android:text="Correo:"
+                android:textColor="#000"
+                android:textSize="14dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/h_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/h_nombre"
+                android:layout_marginLeft="60dp"
+                android:hint="Cuadro de texto"
+                android:textColor="#000"
+                android:textSize="14dp" />
+
+        </RelativeLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+</LinearLayout>
