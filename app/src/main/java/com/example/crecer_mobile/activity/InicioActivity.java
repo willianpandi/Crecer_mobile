@@ -42,7 +42,7 @@ public class InicioActivity extends AppCompatActivity {
         setSupportActionBar(binding.appBarInicio.toolbar);
 
 
-        ///boton de preguntar
+        ///boton flotante
         /*
         <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
@@ -106,7 +106,8 @@ public class InicioActivity extends AppCompatActivity {
                 .setPositiveButton("Salir", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        System.exit(0);
+                        Toast.makeText(getApplicationContext(), "¡GRACIAS!\n Por utilizar Crecer Móvil", Toast.LENGTH_SHORT).show();
+                        finishAffinity();
                     }
                 })
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {

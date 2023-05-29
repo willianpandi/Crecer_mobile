@@ -18,7 +18,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Crecer_mobile"
         tools:targetApi="31">
-
+        <activity
+            android:name=".activity.MainActivity7"
+            android:exported="false" />
+        <activity
+            android:name=".activity.MainActivity6"
+            android:exported="false" />
+        <activity
+            android:name=".activity.MainActivity5"
+            android:exported="false" />
         <activity
             android:name=".activity.MainActivity4"
             android:exported="false" />
@@ -42,4 +50,5 @@
             </intent-filter>
         </activity>
     </application>
+
 </manifest>

@@ -46,8 +46,8 @@
             <group android:checkableBehavior="single">
                 <item
                     android:id="@+id/nav_configuracion"
-                    android:icon="@drawable/ic_configuracion"
-                    android:title="Configuración" />
+                    android:icon="@drawable/ic_usuario"
+                    android:title="Mi perfil" />
             </group>
         </menu>
     </item>

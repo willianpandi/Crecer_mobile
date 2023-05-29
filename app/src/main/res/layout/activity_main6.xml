@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/ic_launcher_background"
+    tools:context=".activity.MainActivity6">
+    <LinearLayout
+        android:id="@+id/linearParte1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/imageVie2"
+            android:layout_width="270dp"
+            android:layout_height="94dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/logo_crecer" />
+
+        <ImageView
+            android:id="@+id/imagenoffline"
+            android:layout_width="150dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="100dp"
+            app:srcCompat="@drawable/icon_sin_internet" />
+
+        <TextView
+            android:id="@+id/textView_offline1_2"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="Parece que no estas conectado"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView_offline2_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:text="Revisa tu conexión WIFI o la señal de tu operadora y activa los datos moviles."
+            android:textAlignment="center" />
+
+        <Button
+            android:id="@+id/buttonoffline_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#951F1F"
+            android:layout_marginTop="150dp"
+            android:drawableTint="#fff"
+            android:text="Volver a Conectar"
+            android:textAllCaps="false"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

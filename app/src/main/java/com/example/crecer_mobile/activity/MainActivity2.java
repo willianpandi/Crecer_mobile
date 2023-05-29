@@ -63,6 +63,14 @@ public class MainActivity2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        boolean isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
+        if (!isConnected) {
+            startActivity(new Intent(MainActivity2.this, MainActivity6.class));
+        }else {
+            setContentView(R.layout.activity_main2);
+        }
 
         //logico vs grafico
         btnIngresar = (Button) findViewById(R.id.button);
@@ -89,6 +97,7 @@ public class MainActivity2 extends AppCompatActivity {
                 try {
                     if (validar()) {
                         validarusuario("https://computacionmovil2.000webhostapp.com/validar_usuario.php");
+                        //validarusuario("http://192.168.100.36/crecer/validar_usuario.php");
                         carga.setVisibility(View.VISIBLE);
                     }
                 } catch (Exception e) {
@@ -193,7 +202,14 @@ public class MainActivity2 extends AppCompatActivity {
                     MaterialAlertDialogBuilder alerta = new MaterialAlertDialogBuilder(MainActivity2.this);
                     alerta.setTitle("Credenciales incorrectas")
                             .setMessage("Ingrese el usuario y contraseña correspondiente")
-                            .setIcon(R.drawable.ic_error);
+                            .setIcon(R.drawable.ic_error)
+                            .setCancelable(false)
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                }
+                            });
                     alerta.show();
                     txtuser.setText("");
                     txtpass.setText("");
@@ -204,7 +220,21 @@ public class MainActivity2 extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 if (error instanceof NetworkError) {
-                    Toast.makeText(getApplicationContext(), "En este momento no tienes conexión a internet", Toast.LENGTH_SHORT).show();
+                    MaterialAlertDialogBuilder alerta = new MaterialAlertDialogBuilder(MainActivity2.this);
+                    alerta.setTitle("Parece que no estas conectado")
+                            .setIcon(R.drawable.icon_sin_internet)
+                            .setMessage("Revisa tu conexión WIFI o la señal de tu operadora y activa los datos móviles.")
+                            .setCancelable(false)
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    txtuser.setText("");
+                                    txtpass.setText("");
+                                    txtuser.requestFocus();
+                                }
+                            });
+                    alerta.show();
+                    //Toast.makeText(getApplicationContext(), "En este momento no tienes conexión a internet", Toast.LENGTH_SHORT).show();
                 } else if (error instanceof TimeoutError) {
                     Toast.makeText(getApplicationContext(), "Tiempo de espera excedido", Toast.LENGTH_SHORT).show();
                 } else if (error instanceof ServerError) {
@@ -299,7 +329,8 @@ public class MainActivity2 extends AppCompatActivity {
         }
         else {
             if (presionado + 2000 > System.currentTimeMillis())
-                super.onBackPressed();
+                //super.onBackPressed();
+                finishAffinity();
             else
                 Toast.makeText(this, "Toque de nuevo para salir de Crecer Móvil", Toast.LENGTH_SHORT).show();
             presionado = System.currentTimeMillis();

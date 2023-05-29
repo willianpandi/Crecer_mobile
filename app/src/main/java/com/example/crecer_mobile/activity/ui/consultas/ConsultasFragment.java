@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
@@ -29,6 +31,8 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.crecer_mobile.R;
 import com.example.crecer_mobile.activity.MainActivity2;
+import com.example.crecer_mobile.activity.MainActivity5;
+import com.example.crecer_mobile.activity.MainActivity7;
 import com.example.crecer_mobile.entity.adapter.AdapterCuentas;
 import com.example.crecer_mobile.entity.Cuenta;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -54,35 +58,41 @@ public class ConsultasFragment extends Fragment {
     LinearProgressIndicator carga;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        vista = inflater.inflate(R.layout.fragment_consulta, container, false);
+                             ViewGroup container, Bundle savedInstanceState){
+        ConnectivityManager cm = (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        boolean isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
+        if (!isConnected) {
+            startActivity(new Intent(getActivity(), MainActivity5.class));
+        } else {
+            vista = inflater.inflate(R.layout.fragment_consulta, container, false);
 
-        //logico y GUI
-        recyclerView = (RecyclerView) vista.findViewById(R.id.recyclerview_cuentas);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        btnbuscar = (Button) vista.findViewById(R.id.button2);
-        txtbuscar = (EditText) vista.findViewById(R.id.edtbusqueda);
-        txtInputUsuario = (TextInputLayout) vista.findViewById(R.id.editTextTextPersonName_busqueda);
+            //logico y GUI
+            recyclerView = (RecyclerView) vista.findViewById(R.id.recyclerview_cuentas);
+            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+            btnbuscar = (Button) vista.findViewById(R.id.button2);
+            txtbuscar = (EditText) vista.findViewById(R.id.edtbusqueda);
+            txtInputUsuario = (TextInputLayout) vista.findViewById(R.id.editTextTextPersonName_busqueda);
 
-        carga = (LinearProgressIndicator) vista.findViewById(R.id.carga_lineal);
+            carga = (LinearProgressIndicator) vista.findViewById(R.id.carga_lineal);
 
-        //BTON buscar}
-        btnbuscar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (!txtbuscar.getText().toString().isEmpty()) {
-                    lista = new ArrayList<Cuenta>();
-                    buscarcuenta("https://computacionmovil2.000webhostapp.com/buscar_cuenta.php?id=" + txtbuscar.getText().toString());
-                    carga.setVisibility(View.VISIBLE);
-                    txtbuscar.setText("");
-                } else {
-                    Toast.makeText(getActivity(), "Ingrese un número de cédula", Toast.LENGTH_SHORT).show();
+            //BTON buscar}
+            btnbuscar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (!txtbuscar.getText().toString().isEmpty()) {
+                        lista = new ArrayList<Cuenta>();
+                        buscarcuenta("https://computacionmovil2.000webhostapp.com/buscar_cuenta.php?id=" + txtbuscar.getText().toString());
+                        carga.setVisibility(View.VISIBLE);
+                        txtbuscar.setText("");
+                    } else {
+                        Toast.makeText(getActivity(), "Ingrese un número de cédula", Toast.LENGTH_SHORT).show();
+                    }
+                    cerrarTeclado();
                 }
-                cerrarTeclado();
-            }
-        });
+            });
+        }
         return vista;
-
     }
 
     ///////////// BUSCA CUENTA POR NUMERO DE CEDULA ////////////
@@ -114,7 +124,8 @@ public class ConsultasFragment extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
                 if (error instanceof NetworkError) {
-                    Toast.makeText(getActivity(), "En este momento no tienes conexión a internet", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(getActivity(), MainActivity5.class));
+                    //Toast.makeText(getActivity(), "En este momento no tienes conexión a internet", Toast.LENGTH_SHORT).show();
                 } else if (error instanceof TimeoutError) {
                     Toast.makeText(getActivity(), "Tiempo de espera excedido", Toast.LENGTH_SHORT).show();
                 } else if (error instanceof ServerError) {
@@ -154,20 +165,7 @@ public class ConsultasFragment extends Fragment {
         boolean isSessionValid = sessionTime < MAX_SESSION_TIME; // MAX_SESSION_TIME es el tiempo máximo de validez en segundos
         // hacer algo con el resultado de isSessionValid
         if (!isSessionValid) {
-            MaterialAlertDialogBuilder alerta = new MaterialAlertDialogBuilder(getActivity());
-            alerta.setTitle("Tu sesión ha expirado")
-                    .setIcon(R.drawable.ic_error)
-                    .setMessage("Por seguridad hemos cerrado tu sesión, debido a que excediste tu límite de tiempo.")
-                    .setCancelable(false)
-                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            startActivity(new Intent(getActivity(), MainActivity2.class));
-                            Toast.makeText(getActivity(), "Se ha cerrado la sesión correctamente.".toString(), Toast.LENGTH_SHORT).show();
-                            getActivity().finish();
-                        }
-                    });
-            alerta.show();
+            startActivity(new Intent(getActivity(), MainActivity7.class));
         }
     }
 }

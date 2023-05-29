@@ -176,7 +176,8 @@ public class MainActivity3 extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 if (error instanceof NetworkError) {
-                    Toast.makeText(getApplicationContext(), "En este momento no tienes conexión a internet", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(MainActivity3.this, MainActivity5.class));
+                    //Toast.makeText(getApplicationContext(), "En este momento no tienes conexión a internet", Toast.LENGTH_SHORT).show();
                 } else if (error instanceof TimeoutError) {
                     Toast.makeText(getApplicationContext(), "Tiempo de espera excedido", Toast.LENGTH_SHORT).show();
                 } else if (error instanceof ServerError) {

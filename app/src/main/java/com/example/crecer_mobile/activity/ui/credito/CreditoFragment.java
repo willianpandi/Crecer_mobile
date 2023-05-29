@@ -16,6 +16,8 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.graphics.pdf.PdfDocument;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -45,6 +47,8 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.crecer_mobile.R;
 import com.example.crecer_mobile.activity.MainActivity2;
+import com.example.crecer_mobile.activity.MainActivity5;
+import com.example.crecer_mobile.activity.MainActivity7;
 import com.example.crecer_mobile.entity.Ahorro;
 import com.example.crecer_mobile.entity.Credito;
 import com.example.crecer_mobile.entity.adapter.AdapterAhorros;
@@ -81,124 +85,130 @@ public class CreditoFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        vista = inflater.inflate(R.layout.fragment_credito, container, false);
+        ConnectivityManager cm = (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        boolean isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
+        if (!isConnected) {
+            startActivity(new Intent(getActivity(), MainActivity5.class));
+        } else {
 
-        //logico y visual
-        btncalendario_credito = (Button) vista.findViewById(R.id.button9);
-        btncalendario_credito2 = (Button) vista.findViewById(R.id.button_hc);
-        btnbuscar_credito = (Button) vista.findViewById(R.id.button10);
-        btncotizar = (Button) vista.findViewById(R.id.button4);
-        btnPDF = (Button) vista.findViewById(R.id.button11);
-        btndescargar = (Button) vista.findViewById(R.id.button5);
-        txtcalendario = (TextView) vista.findViewById(R.id.textViewCalendario_Credito);
-        txtcalendario2 = (TextView) vista.findViewById(R.id.textViewCalendario_Credito2);
+            vista = inflater.inflate(R.layout.fragment_credito, container, false);
 
-        recyclerView4 = (RecyclerView) vista.findViewById(R.id.recyclerview_credito);
-        recyclerView4.setLayoutManager(new LinearLayoutManager(getActivity()));
+            //logico y visual
+            btncalendario_credito = (Button) vista.findViewById(R.id.button9);
+            btncalendario_credito2 = (Button) vista.findViewById(R.id.button_hc);
+            btnbuscar_credito = (Button) vista.findViewById(R.id.button10);
+            btncotizar = (Button) vista.findViewById(R.id.button4);
+            btnPDF = (Button) vista.findViewById(R.id.button11);
+            btndescargar = (Button) vista.findViewById(R.id.button5);
+            txtcalendario = (TextView) vista.findViewById(R.id.textViewCalendario_Credito);
+            txtcalendario2 = (TextView) vista.findViewById(R.id.textViewCalendario_Credito2);
 
-        //Progress Carga
-        carga = (LinearProgressIndicator) vista.findViewById(R.id.carga_lineal);
+            recyclerView4 = (RecyclerView) vista.findViewById(R.id.recyclerview_credito);
+            recyclerView4.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        //enlaces
-        url1 = "https://crecer.fin.ec/cotizador/MicroCalculadora.html";
-        url2 = "https://crecer.fin.ec/wp-content/uploads/2021/08/SOLICITUD-CREDITO-2020-ENERO2.pdf";
+            //Progress Carga
+            carga = (LinearProgressIndicator) vista.findViewById(R.id.carga_lineal);
 
-        //Traer el usuario los datos del login
-        SharedPreferences shared = getActivity().getSharedPreferences("preferences2", Context.MODE_PRIVATE);
-        dato1 = shared.getString("string1", "");
-        dato2 = shared.getString("string2", "");
+            //enlaces
+            url1 = "https://crecer.fin.ec/cotizador/MicroCalculadora.html";
+            url2 = "https://crecer.fin.ec/wp-content/uploads/2021/08/SOLICITUD-CREDITO-2020-ENERO2.pdf";
 
-        SharedPreferences shared2 = getActivity().getSharedPreferences("preferences", Context.MODE_PRIVATE);
-        dat = shared2.getString("string", "");
-        //Treyendo el dato
-        lista = new ArrayList<Credito>();
-        buscarcredito("https://computacionmovil2.000webhostapp.com/buscar_credito.php?id=" + dato1 +"");
-        carga.setVisibility(View.VISIBLE);
+            //Traer el usuario los datos del login
+            SharedPreferences shared = getActivity().getSharedPreferences("preferences2", Context.MODE_PRIVATE);
+            dato1 = shared.getString("string1", "");
+            dato2 = shared.getString("string2", "");
 
-        //Boton de calendario
-        btncalendario_credito.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Calendar cal = Calendar.getInstance();
-                int anio = cal.get(Calendar.YEAR);
-                int mes = cal.get(Calendar.MONTH);
-                int dia = cal.get(Calendar.DAY_OF_MONTH);
-                DatePickerDialog dpd = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker datePicker, int year, int month, int dayofMonth) {
-                        month=month+1;
-                        String fecha = year+"-"+month+"-"+dayofMonth;
-                        txtcalendario.setText(fecha);
-                    }
-                },anio,mes,dia);
-                dpd.getDatePicker().setMaxDate(cal.getTimeInMillis());
-                dpd.show();
-            }
-        });
+            SharedPreferences shared2 = getActivity().getSharedPreferences("preferences", Context.MODE_PRIVATE);
+            dat = shared2.getString("string", "");
+            //Treyendo el dato
+            lista = new ArrayList<Credito>();
+            buscarcredito("https://computacionmovil2.000webhostapp.com/buscar_credito.php?id=" + dato1 + "");
+            carga.setVisibility(View.VISIBLE);
 
-        btncalendario_credito2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Calendar cal = Calendar.getInstance();
-                int anio = cal.get(Calendar.YEAR);
-                int mes = cal.get(Calendar.MONTH);
-                int dia = cal.get(Calendar.DAY_OF_MONTH);
-                DatePickerDialog dpd = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker datePicker, int year, int month, int dayofMonth) {
-                        month=month+1;
-                        String fecha2 = year+"-"+month+"-"+dayofMonth;
-                        txtcalendario2.setText(fecha2);
-                    }
-                },anio,mes,dia);
-                dpd.getDatePicker().setMaxDate(cal.getTimeInMillis());
-                dpd.show();
-            }
-        });
-        //boton de buscar por fecha
-        btnbuscar_credito.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                lista = new ArrayList<Credito>();
-                buscarcredito("https://computacionmovil2.000webhostapp.com/buscar_creditofecha.php?id=" + dato1 + "&&fecha="+txtcalendario.getText().toString() + "&&fecha2="+txtcalendario2.getText().toString() + "");
-                carga.setVisibility(View.VISIBLE);
-                txtcalendario.setText("");
-                txtcalendario2.setText("");
-                cerrarTeclado();
-            }
-        });
+            //Boton de calendario
+            btncalendario_credito.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Calendar cal = Calendar.getInstance();
+                    int anio = cal.get(Calendar.YEAR);
+                    int mes = cal.get(Calendar.MONTH);
+                    int dia = cal.get(Calendar.DAY_OF_MONTH);
+                    DatePickerDialog dpd = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+                        @Override
+                        public void onDateSet(DatePicker datePicker, int year, int month, int dayofMonth) {
+                            month = month + 1;
+                            String fecha = year + "-" + month + "-" + dayofMonth;
+                            txtcalendario.setText(fecha);
+                        }
+                    }, anio, mes, dia);
+                    dpd.getDatePicker().setMaxDate(cal.getTimeInMillis());
+                    dpd.show();
+                }
+            });
 
-        //Logo de PDF
-        bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.logo_crecer);
-        bitmapEscala = Bitmap.createScaledBitmap(bitmap, 350, 115, false);
-        ActivityCompat.requestPermissions(getActivity(), new String[]{
-                Manifest.permission.WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE}, PackageManager.PERMISSION_GRANTED);
+            btncalendario_credito2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Calendar cal = Calendar.getInstance();
+                    int anio = cal.get(Calendar.YEAR);
+                    int mes = cal.get(Calendar.MONTH);
+                    int dia = cal.get(Calendar.DAY_OF_MONTH);
+                    DatePickerDialog dpd = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+                        @Override
+                        public void onDateSet(DatePicker datePicker, int year, int month, int dayofMonth) {
+                            month = month + 1;
+                            String fecha2 = year + "-" + month + "-" + dayofMonth;
+                            txtcalendario2.setText(fecha2);
+                        }
+                    }, anio, mes, dia);
+                    dpd.getDatePicker().setMaxDate(cal.getTimeInMillis());
+                    dpd.show();
+                }
+            });
+            //boton de buscar por fecha
+            btnbuscar_credito.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    lista = new ArrayList<Credito>();
+                    buscarcredito("https://computacionmovil2.000webhostapp.com/buscar_creditofecha.php?id=" + dato1 + "&&fecha=" + txtcalendario.getText().toString() + "&&fecha2=" + txtcalendario2.getText().toString() + "");
+                    carga.setVisibility(View.VISIBLE);
+                    txtcalendario.setText("");
+                    txtcalendario2.setText("");
+                    cerrarTeclado();
+                }
+            });
 
-        createPDF();
+            //Logo de PDF
+            bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.logo_crecer);
+            bitmapEscala = Bitmap.createScaledBitmap(bitmap, 350, 115, false);
+            ActivityCompat.requestPermissions(getActivity(), new String[]{
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE}, PackageManager.PERMISSION_GRANTED);
 
-        //Botón para cotizar credito
-        btncotizar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Uri uri = Uri.parse(url1);
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                startActivity(intent);
-            }
-        });
+            createPDF();
 
-        //Botón descargar el archivo de solicitud de crédito
-        btndescargar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Uri uri = Uri.parse(url2);
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                startActivity(intent);
-            }
-        });
-        return vista;
+            //Botón para cotizar credito
+            btncotizar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Uri uri = Uri.parse(url1);
+                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                    startActivity(intent);
+                }
+            });
+
+            //Botón descargar el archivo de solicitud de crédito
+            btndescargar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Uri uri = Uri.parse(url2);
+                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                    startActivity(intent);
+                }
+            });
+        }
+                return vista;
     }
-
-
     private void buscarcredito(String URL) {
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(URL, new Response.Listener<JSONArray>() {
             @Override
@@ -228,12 +238,13 @@ public class CreditoFragment extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
                 if (error instanceof NetworkError) {
+                    //startActivity(new Intent(getActivity(), MainActivity5.class));
                     Toast.makeText(getActivity(), "En este momento no tienes conexión a internet", Toast.LENGTH_SHORT).show();
                 } else if (error instanceof TimeoutError) {
                     Toast.makeText(getActivity(), "Tiempo de espera excedido", Toast.LENGTH_SHORT).show();
                 } else if (error instanceof ServerError) {
                     Toast.makeText(getActivity(), "Error del servidor", Toast.LENGTH_SHORT).show();
-                } else Toast.makeText(getActivity(), "Error de la busqueda por fechas", Toast.LENGTH_LONG).show();
+                } else Toast.makeText(getActivity(), "Error de la busqueda", Toast.LENGTH_LONG).show();
                 carga.setVisibility(View.INVISIBLE);
             }
         });
@@ -264,24 +275,9 @@ public class CreditoFragment extends Fragment {
         long sessionTime = (currentTime - sessionStartTime) / 1000;
         boolean isSessionValid = sessionTime < MAX_SESSION_TIME;
         if (!isSessionValid) {
-            MaterialAlertDialogBuilder alerta = new MaterialAlertDialogBuilder(getActivity());
-            alerta.setTitle("Tu sesión ha expirado")
-                    .setIcon(R.drawable.ic_error)
-                    .setMessage("Por seguridad hemos cerrado tu sesión, debido a que excediste tu límite de tiempo.")
-                    .setCancelable(false)
-                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            startActivity(new Intent(getActivity(), MainActivity2.class));
-                            Toast.makeText(getActivity(), "Se ha cerrado la sesión correctamente.".toString(), Toast.LENGTH_SHORT).show();
-                            getActivity().finish();
-                        }
-                    });
-            alerta.show();
+            startActivity(new Intent(getActivity(), MainActivity7.class));
         }
     }
-
-
 
     //Metodo de PDF
     public void createPDF(){

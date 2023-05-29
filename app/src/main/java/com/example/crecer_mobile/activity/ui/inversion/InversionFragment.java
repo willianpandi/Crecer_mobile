@@ -16,6 +16,8 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.graphics.pdf.PdfDocument;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Environment;
 import android.preference.PreferenceManager;
@@ -45,6 +47,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.crecer_mobile.R;
 import com.example.crecer_mobile.activity.InicioActivity;
 import com.example.crecer_mobile.activity.MainActivity2;
+import com.example.crecer_mobile.activity.MainActivity5;
 import com.example.crecer_mobile.entity.Credito;
 import com.example.crecer_mobile.entity.Cuenta_inicio;
 import com.example.crecer_mobile.entity.Inversion;
@@ -78,93 +81,98 @@ public class InversionFragment extends Fragment {
     int pageWith = 1400;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
+                             ViewGroup container, Bundle savedInstanceState){
         vista = inflater.inflate(R.layout.fragment_inversion, container, false);
-        btncalendario_in = (Button) vista.findViewById(R.id.button12);
-        btncalendario_in2 = (Button) vista.findViewById(R.id.button_hi);
-        btnBuscar_in = (Button) vista.findViewById(R.id.button13);
-        btnPDF_in = (Button) vista.findViewById(R.id.button14);
-        txtcalendario = (TextView) vista.findViewById(R.id.textViewCalendario_Inversion);
-        txtcalendario2 = (TextView) vista.findViewById(R.id.textViewCalendario_Inversion2);
+        ConnectivityManager cm = (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        boolean isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
+        if (!isConnected) {
+            startActivity(new Intent(getActivity(), MainActivity5.class));
+        } else {
+            btncalendario_in = (Button) vista.findViewById(R.id.button12);
+            btncalendario_in2 = (Button) vista.findViewById(R.id.button_hi);
+            btnBuscar_in = (Button) vista.findViewById(R.id.button13);
+            btnPDF_in = (Button) vista.findViewById(R.id.button14);
+            txtcalendario = (TextView) vista.findViewById(R.id.textViewCalendario_Inversion);
+            txtcalendario2 = (TextView) vista.findViewById(R.id.textViewCalendario_Inversion2);
 
-        recyclerView6 = (RecyclerView) vista.findViewById(R.id.recyclerview_inversion);
-        recyclerView6.setLayoutManager(new LinearLayoutManager(getActivity()));
-        carga = (LinearProgressIndicator) vista.findViewById(R.id.carga_lineal);
+            recyclerView6 = (RecyclerView) vista.findViewById(R.id.recyclerview_inversion);
+            recyclerView6.setLayoutManager(new LinearLayoutManager(getActivity()));
+            carga = (LinearProgressIndicator) vista.findViewById(R.id.carga_lineal);
 
-        //traer el dato del login
-        SharedPreferences shared = getActivity().getSharedPreferences("preferences2", Context.MODE_PRIVATE);
-        dato1 = shared.getString("string1", "");
-        dato2 = shared.getString("string2", "");
+            //traer el dato del login
+            SharedPreferences shared = getActivity().getSharedPreferences("preferences2", Context.MODE_PRIVATE);
+            dato1 = shared.getString("string1", "");
+            dato2 = shared.getString("string2", "");
 
-        SharedPreferences shared2 = getActivity().getSharedPreferences("preferences", Context.MODE_PRIVATE);
-        dat = shared2.getString("string", "");
+            SharedPreferences shared2 = getActivity().getSharedPreferences("preferences", Context.MODE_PRIVATE);
+            dat = shared2.getString("string", "");
 
-        lista = new ArrayList<Inversion>();
-        buscarinversion("https://computacionmovil2.000webhostapp.com/buscar_inversion.php?id=" + dato1 + "");
-        carga.setVisibility(View.VISIBLE);
-        btncalendario_in.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Calendar cal = Calendar.getInstance();
-                int anio = cal.get(Calendar.YEAR);
-                int mes = cal.get(Calendar.MONTH);
-                int dia = cal.get(Calendar.DAY_OF_MONTH);
-                DatePickerDialog dpd = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker datePicker, int year, int month, int dayofMonth) {
-                        month=month+1;
-                        String fecha = year+"-"+month+"-"+dayofMonth;
-                        txtcalendario.setText(fecha);
-                    }
-                },anio,mes,dia);
-                dpd.getDatePicker().setMaxDate(cal.getTimeInMillis());
-                dpd.show();
-            }
-        });
+            lista = new ArrayList<Inversion>();
+            buscarinversion("https://computacionmovil2.000webhostapp.com/buscar_inversion.php?id=" + dato1 + "");
+            carga.setVisibility(View.VISIBLE);
+            btncalendario_in.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Calendar cal = Calendar.getInstance();
+                    int anio = cal.get(Calendar.YEAR);
+                    int mes = cal.get(Calendar.MONTH);
+                    int dia = cal.get(Calendar.DAY_OF_MONTH);
+                    DatePickerDialog dpd = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+                        @Override
+                        public void onDateSet(DatePicker datePicker, int year, int month, int dayofMonth) {
+                            month = month + 1;
+                            String fecha = year + "-" + month + "-" + dayofMonth;
+                            txtcalendario.setText(fecha);
+                        }
+                    }, anio, mes, dia);
+                    dpd.getDatePicker().setMaxDate(cal.getTimeInMillis());
+                    dpd.show();
+                }
+            });
 
-        btncalendario_in2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Calendar cal = Calendar.getInstance();
-                int anio = cal.get(Calendar.YEAR);
-                int mes = cal.get(Calendar.MONTH);
-                int dia = cal.get(Calendar.DAY_OF_MONTH);
-                DatePickerDialog dpd = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker datePicker, int year, int month, int dayofMonth) {
-                        month=month+1;
-                        String fecha2 = year+"-"+month+"-"+dayofMonth;
-                        txtcalendario2.setText(fecha2);
-                    }
-                },anio,mes,dia);
-                dpd.getDatePicker().setMaxDate(cal.getTimeInMillis());
-                dpd.show();
-            }
-        });
+            btncalendario_in2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Calendar cal = Calendar.getInstance();
+                    int anio = cal.get(Calendar.YEAR);
+                    int mes = cal.get(Calendar.MONTH);
+                    int dia = cal.get(Calendar.DAY_OF_MONTH);
+                    DatePickerDialog dpd = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+                        @Override
+                        public void onDateSet(DatePicker datePicker, int year, int month, int dayofMonth) {
+                            month = month + 1;
+                            String fecha2 = year + "-" + month + "-" + dayofMonth;
+                            txtcalendario2.setText(fecha2);
+                        }
+                    }, anio, mes, dia);
+                    dpd.getDatePicker().setMaxDate(cal.getTimeInMillis());
+                    dpd.show();
+                }
+            });
 
-        btnBuscar_in.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                lista = new ArrayList<Inversion>();
-                buscarinversion("https://computacionmovil2.000webhostapp.com/buscar_inversionfecha.php?id=" + dato1 + "&&fecha="+txtcalendario.getText().toString()+"&&fecha2="+txtcalendario2.getText().toString()+"");
-                carga.setVisibility(View.VISIBLE);
-                txtcalendario.setText("");
-                txtcalendario2.setText("");
-                cerrarTeclado();
-            }
-        });
+            btnBuscar_in.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    lista = new ArrayList<Inversion>();
+                    buscarinversion("https://computacionmovil2.000webhostapp.com/buscar_inversionfecha.php?id=" + dato1 + "&&fecha=" + txtcalendario.getText().toString() + "&&fecha2=" + txtcalendario2.getText().toString() + "");
+                    carga.setVisibility(View.VISIBLE);
+                    txtcalendario.setText("");
+                    txtcalendario2.setText("");
+                    cerrarTeclado();
+                }
+            });
 
-        //PDF
-        bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.logo_crecer);
-        bitmapEscala = Bitmap.createScaledBitmap(bitmap, 350, 115, false);
-        ActivityCompat.requestPermissions(getActivity(), new String[]{
-                Manifest.permission.WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE}, PackageManager.PERMISSION_GRANTED);
+            //PDF
+            bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.logo_crecer);
+            bitmapEscala = Bitmap.createScaledBitmap(bitmap, 350, 115, false);
+            ActivityCompat.requestPermissions(getActivity(), new String[]{
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE, READ_EXTERNAL_STORAGE}, PackageManager.PERMISSION_GRANTED);
 
-        createPDF();
-
+            createPDF();
+        }
         return vista;
     }
-
 
     private void buscarinversion(String URL) {
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(URL, new Response.Listener<JSONArray>() {
@@ -195,13 +203,14 @@ public class InversionFragment extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
                 if (error instanceof NetworkError) {
-                    Toast.makeText(getActivity(), "En este momento no tienes conexión a internet", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(getActivity(), MainActivity5.class));
+                    //Toast.makeText(getActivity(), "En este momento no tienes conexión a internet", Toast.LENGTH_SHORT).show();
                 } else if (error instanceof TimeoutError) {
                     Toast.makeText(getActivity(), "Tiempo de espera excedido", Toast.LENGTH_SHORT).show();
                 } else if (error instanceof ServerError) {
                     Toast.makeText(getActivity(), "Error del servidor", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(getActivity(), "Error de la busqueda por fechas", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "Error de la busqueda", Toast.LENGTH_LONG).show();
                 }
                 carga.setVisibility(View.INVISIBLE);
             }

@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
@@ -32,6 +34,9 @@ import com.android.volley.toolbox.Volley;
 import com.example.crecer_mobile.R;
 import com.example.crecer_mobile.activity.InicioActivity;
 import com.example.crecer_mobile.activity.MainActivity2;
+import com.example.crecer_mobile.activity.MainActivity4;
+import com.example.crecer_mobile.activity.MainActivity5;
+import com.example.crecer_mobile.activity.MainActivity7;
 import com.example.crecer_mobile.entity.Credito;
 import com.example.crecer_mobile.entity.Cuenta_inicio;
 import com.example.crecer_mobile.entity.adapter.AdapterCredito;
@@ -63,8 +68,8 @@ public class InicioFragment extends Fragment {
                         .setPositiveButton("Salir", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                Toast.makeText(getActivity(), "¡GRACIAS!\n Por utilizar Crecer Móvil".toString(), Toast.LENGTH_SHORT).show();
-                                System.exit(0);
+                                Toast.makeText(getActivity(), "¡GRACIAS!\n Por utilizar Crecer Móvil", Toast.LENGTH_SHORT).show();
+                                getActivity().finishAffinity();
                             }
                         })
                         .setNegativeButton("Cerrar Sesión", new DialogInterface.OnClickListener() {
@@ -91,23 +96,27 @@ public class InicioFragment extends Fragment {
     LinearProgressIndicator carga;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-
+                             ViewGroup container, Bundle savedInstanceState){
         vista = inflater.inflate(R.layout.fragment_inicio, container, false);
+        ConnectivityManager cm = (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        boolean isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
+        if (!isConnected) {
+            startActivity(new Intent(getActivity(), MainActivity5.class));
+        } else  {
 
-        //someOtherMethod();
-        recyclerView5 = (RecyclerView) vista.findViewById(R.id.recyclerview_cuenta_inicio);
-        recyclerView5.setLayoutManager(new LinearLayoutManager(getActivity()));
-        carga = (LinearProgressIndicator) vista.findViewById(R.id.carga_lineal);
+            //someOtherMethod();
+            recyclerView5 = (RecyclerView) vista.findViewById(R.id.recyclerview_cuenta_inicio);
+            recyclerView5.setLayoutManager(new LinearLayoutManager(getActivity()));
+            carga = (LinearProgressIndicator) vista.findViewById(R.id.carga_lineal);
 
-        SharedPreferences shared = getActivity().getSharedPreferences("preferences2", Context.MODE_PRIVATE);
-        String dato = shared.getString("string1", "");
+            SharedPreferences shared = getActivity().getSharedPreferences("preferences2", Context.MODE_PRIVATE);
+            String dato = shared.getString("string1", "");
 
-        lista = new ArrayList<Cuenta_inicio>();
-        buscarUsuario("https://computacionmovil2.000webhostapp.com/buscar_cuenta.php?id=" + dato + "");
-        carga.setVisibility(View.VISIBLE);
-
-        //setupBackPressed();
+            lista = new ArrayList<Cuenta_inicio>();
+            buscarUsuario("https://computacionmovil2.000webhostapp.com/buscar_cuenta.php?id=" + dato + "");
+            carga.setVisibility(View.VISIBLE);
+        }
         return vista;
     }
 
@@ -139,6 +148,7 @@ public class InicioFragment extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
                 if (error instanceof NetworkError) {
+                    //startActivity(new Intent(getActivity(), MainActivity5.class));
                     Toast.makeText(getActivity(), "En este momento no tienes conexión a internet", Toast.LENGTH_SHORT).show();
                 } else if (error instanceof TimeoutError) {
                     Toast.makeText(getActivity(), "Tiempo de espera excedido", Toast.LENGTH_SHORT).show();
@@ -167,7 +177,8 @@ public class InicioFragment extends Fragment {
         boolean isSessionValid = sessionTime < MAX_SESSION_TIME; // MAX_SESSION_TIME es el tiempo máximo de validez en segundos
         // hacer algo con el resultado de isSessionValid
         if (!isSessionValid) {
-            MaterialAlertDialogBuilder alerta = new MaterialAlertDialogBuilder(getActivity());
+            startActivity(new Intent(getActivity(), MainActivity7.class));
+            /*MaterialAlertDialogBuilder alerta = new MaterialAlertDialogBuilder(getActivity());
             alerta.setTitle("Tu sesión ha expirado")
                     .setIcon(R.drawable.ic_error)
                     .setMessage("Por seguridad hemos cerrado tu sesión, debido a que excediste tu límite de tiempo.")
@@ -180,7 +191,7 @@ public class InicioFragment extends Fragment {
                             getActivity().finish();
                         }
                     });
-            alerta.show();
+            alerta.show();*/
         }
     }
 }
