@@ -93,11 +93,9 @@ public class MainActivity2 extends AppCompatActivity {
         btnIngresar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 try {
                     if (validar()) {
                         validarusuario("https://computacionmovil2.000webhostapp.com/validar_usuario.php");
-                        //validarusuario("http://192.168.100.36/crecer/validar_usuario.php");
                         carga.setVisibility(View.VISIBLE);
                     }
                 } catch (Exception e) {

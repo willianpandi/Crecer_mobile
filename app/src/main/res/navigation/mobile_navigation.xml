@@ -38,7 +38,12 @@
     <fragment
         android:id="@+id/nav_configuracion"
         android:name="com.example.crecer_mobile.activity.ui.configuracion.ConfiguracionFragment"
-        android:label="Configuración"
+        android:label="Mi perfil"
         tools:layout="@layout/fragment_configuracion" />
+    <fragment
+        android:id="@+id/nav_transaccion"
+        android:name="com.example.crecer_mobile.activity.ui.transacciones.TransaccionFragment"
+        android:label="Crecer en línea"
+        tools:layout="@layout/fragment_transaccion" />
 
 </navigation>

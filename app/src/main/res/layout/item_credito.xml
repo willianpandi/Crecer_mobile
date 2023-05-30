@@ -28,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.4"
                 android:background="@drawable/border"
-                android:text="TextView"
+                android:text=""
                 android:textAlignment="textStart"
                 android:textColor="@color/black"
                 android:textSize="12sp" />
@@ -39,7 +39,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1.2"
                 android:background="@drawable/border"
-                android:text="TextView"
+                android:text=""
                 android:textAlignment="textStart"
                 android:textColor="@color/black"
                 android:textSize="12sp" />
@@ -50,7 +50,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.6"
                 android:background="@drawable/border"
-                android:text="TextView"
+                android:text=""
                 android:textAlignment="textStart"
                 android:textColor="@color/black"
                 android:textSize="12sp" />
@@ -60,7 +60,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="TextView"
+                android:text=""
                 android:textAlignment="textStart"
                 android:textColor="@color/black"
                 android:textSize="12sp" />
@@ -71,7 +71,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1.1"
-                android:text="TextView"
+                android:text=""
                 android:textAlignment="textStart"
                 android:textColor="@color/black"
                 android:textSize="12sp" />
@@ -81,7 +81,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="TextView"
+                android:text=""
                 android:textAlignment="textStart"
                 android:textColor="@color/black"
                 android:textSize="12sp" />
@@ -91,7 +91,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="TextView"
+                android:text=""
                 android:textAlignment="textStart"
                 android:textColor="@color/black"
                 android:textSize="12sp" />
@@ -101,7 +101,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.8"
-                android:text="TextView"
+                android:text=""
                 android:textAlignment="textStart"
                 android:textColor="@color/black"
                 android:textSize="12sp" />

@@ -11,7 +11,7 @@
             android:title="Inicio" />
     </group>
 
-    <item android:title="Consulta de saldos">
+    <item android:title="Consulta de Cuenta">
         <menu>
             <group android:checkableBehavior="single">
                 <item
@@ -37,11 +37,15 @@
                     android:id="@+id/nav_inversiones"
                     android:icon="@drawable/ic_inversiones"
                     android:title="Inversiones" />
+                <item
+                    android:id="@+id/nav_transaccion"
+                    android:icon="@drawable/ic_transaccion"
+                    android:title="Crecer en línea" />
             </group>
         </menu>
     </item>
 
-    <item android:title="Administración">
+    <item android:title="Datos Personales">
         <menu>
             <group android:checkableBehavior="single">
                 <item

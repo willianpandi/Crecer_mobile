@@ -48,6 +48,7 @@ import com.example.crecer_mobile.R;
 import com.example.crecer_mobile.activity.InicioActivity;
 import com.example.crecer_mobile.activity.MainActivity2;
 import com.example.crecer_mobile.activity.MainActivity5;
+import com.example.crecer_mobile.activity.MainActivity7;
 import com.example.crecer_mobile.entity.Credito;
 import com.example.crecer_mobile.entity.Cuenta_inicio;
 import com.example.crecer_mobile.entity.Inversion;
@@ -235,20 +236,7 @@ public class InversionFragment extends Fragment {
         boolean isSessionValid = sessionTime < MAX_SESSION_TIME; // MAX_SESSION_TIME es el tiempo máximo de validez en segundos
         // hacer algo con el resultado de isSessionValid
         if (!isSessionValid) {
-            MaterialAlertDialogBuilder alerta = new MaterialAlertDialogBuilder(getActivity());
-            alerta.setTitle("Tu sesión ha expirado")
-                    .setIcon(R.drawable.ic_error)
-                    .setMessage("Por seguridad hemos cerrado tu sesión, debido a que excediste tu límite de tiempo.")
-                    .setCancelable(false)
-                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            startActivity(new Intent(getActivity(), MainActivity2.class));
-                            Toast.makeText(getActivity(), "Se ha cerrado la sesión correctamente.".toString(), Toast.LENGTH_SHORT).show();
-                            getActivity().finish();
-                        }
-                    });
-            alerta.show();
+            startActivity(new Intent(getActivity(), MainActivity7.class));
         }
     }
 

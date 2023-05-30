@@ -42,7 +42,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="60dp"
-                android:hint="Cuadro de texto"
+                android:hint=""
                 android:textColor="#000"
                 android:textSize="14dp" />
 
@@ -62,7 +62,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/h_dni"
                 android:layout_marginLeft="60dp"
-                android:hint="Cuadro de texto"
+                android:hint=""
                 android:textColor="#000"
                 android:textSize="14dp" />
 
@@ -83,7 +83,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/h_cuenta"
                 android:layout_marginLeft="60dp"
-                android:hint="Cuadro de texto"
+                android:hint=""
                 android:textColor="#000"
                 android:textSize="14dp" />
 
@@ -104,7 +104,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/h_nombre"
                 android:layout_marginLeft="60dp"
-                android:hint="Cuadro de texto"
+                android:hint=""
                 android:textColor="#000"
                 android:textSize="14dp" />
 
